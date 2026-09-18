@@ -1,0 +1,3 @@
+# Only the test runner is needed. Everything else is the standard library --
+# that is deliberate: decimal, abc, enum, dataclasses, functools, itertools.
+pytest>=8.0
