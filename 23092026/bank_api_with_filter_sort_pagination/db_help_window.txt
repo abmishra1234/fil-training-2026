@@ -1,0 +1,25 @@
+✅ Option 1: Use the built-in SQLite CLI
+
+Make sure Python is installed.
+
+Open Command Prompt (Win + R → cmd).
+
+Navigate to your project folder:
+
+cd path\to\light_banking_api
+
+
+Launch the SQLite shell:
+
+sqlite3 banking.db
+
+
+If sqlite3 is not recognized, download the Windows SQLite tools: https://www.sqlite.org/download.html
+ (precompiled binaries). Extract and place sqlite3.exe in your PATH or project folder.
+
+Run SQL queries inside the shell:
+
+.tables            -- list all tables
+SELECT * FROM customers;
+SELECT * FROM bank_accounts;
+.quit              -- exit

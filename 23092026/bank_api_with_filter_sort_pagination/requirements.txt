@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy
+pydantic
+pydantic-settings
+typing-extensions
+pytest
+pytest-cov
+httpx2
+pip-audit
