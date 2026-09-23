@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+requests
+PyJWT==2.8.0
+Werkzeug==3.0.3
