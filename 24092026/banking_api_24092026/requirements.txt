@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+SQLAlchemy
+pydantic
+pydantic-settings
+# Extension 6 - authentication & authorization
+PyJWT                 # JWT encode/decode (the library FastAPI's own docs use)
+pwdlib[argon2]        # password hashing with Argon2id (passlib is unmaintained)
+python-multipart      # needed by OAuth2PasswordRequestForm (form-encoded login)
+# lab / tests
+pytest
+httpx
