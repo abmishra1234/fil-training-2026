@@ -1,0 +1,5 @@
+# Async Python Lab Kit - dependencies (Python 3.11+ ; 3.13 recommended)
+fastapi[standard]>=0.115    # FastAPI + uvicorn + 'fastapi dev' / 'fastapi run' CLI
+httpx2>=2.13                # async + sync HTTP client (successor of httpx; used by TestClient)
+pytest>=8.3
+pytest-asyncio>=1.0         # async tests (1.x removed the old 'event_loop' fixture)
