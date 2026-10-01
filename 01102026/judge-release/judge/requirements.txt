@@ -1,0 +1,4 @@
+# Judge dependencies (install in a separate venv from your API)
+pytest==9.1.1
+httpx==0.28.1
+PyJWT==2.12.1

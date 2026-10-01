@@ -1,0 +1,438 @@
+{
+  "_readme": "Seed data for the Expense Claims API challenge. Load it on EVERY start. Passwords are given in plain text ONLY so the judge can log in - hash them (Argon2id/bcrypt/PBKDF2) when loading and never store or log the plain text.",
+  "approval_threshold_paise": 5000000,
+  "users": [
+    {
+      "id": 1,
+      "username": "asha",
+      "full_name": "Asha Verma",
+      "email": "asha.verma@example.com",
+      "role": "EMPLOYEE",
+      "manager_id": 4,
+      "is_active": true,
+      "password": "Monsoon-Chai-Walks-2026"
+    },
+    {
+      "id": 2,
+      "username": "ravi",
+      "full_name": "Ravi Kumar",
+      "email": "ravi.kumar@example.com",
+      "role": "EMPLOYEE",
+      "manager_id": 4,
+      "is_active": true,
+      "password": "Blue-Kite-Over-Delhi-77"
+    },
+    {
+      "id": 3,
+      "username": "neha",
+      "full_name": "Neha Singh",
+      "email": "neha.singh@example.com",
+      "role": "EMPLOYEE",
+      "manager_id": 5,
+      "is_active": true,
+      "password": "Quiet-River-Paper-Boat-9"
+    },
+    {
+      "id": 4,
+      "username": "priya",
+      "full_name": "Priya Nair",
+      "email": "priya.nair@example.com",
+      "role": "MANAGER",
+      "manager_id": 5,
+      "is_active": true,
+      "password": "Tall-Mango-Tree-Shade-31"
+    },
+    {
+      "id": 5,
+      "username": "vikram",
+      "full_name": "Vikram Rao",
+      "email": "vikram.rao@example.com",
+      "role": "MANAGER",
+      "manager_id": null,
+      "is_active": true,
+      "password": "Silver-Train-To-Shimla-58"
+    },
+    {
+      "id": 6,
+      "username": "farah",
+      "full_name": "Farah Khan",
+      "email": "farah.khan@example.com",
+      "role": "FINANCE_ADMIN",
+      "manager_id": 5,
+      "is_active": true,
+      "password": "Ledger-Balances-At-Dawn-4"
+    },
+    {
+      "id": 7,
+      "username": "meera",
+      "full_name": "Meera Iyer",
+      "email": "meera.iyer@example.com",
+      "role": "AUDITOR",
+      "manager_id": null,
+      "is_active": true,
+      "password": "Every-Receipt-Tells-Tales-6"
+    },
+    {
+      "id": 8,
+      "username": "dinesh",
+      "full_name": "Dinesh Gupta",
+      "email": "dinesh.gupta@example.com",
+      "role": "EMPLOYEE",
+      "manager_id": 4,
+      "is_active": false,
+      "password": "Old-Badge-No-Longer-Works-2"
+    },
+    {
+      "id": 9,
+      "username": "kiran",
+      "full_name": "Kiran Das",
+      "email": "kiran.das@example.com",
+      "role": "EMPLOYEE",
+      "manager_id": 4,
+      "is_active": true,
+      "password": "Lantern-Festival-Nights-88"
+    },
+    {
+      "id": 10,
+      "username": "sunil",
+      "full_name": "Sunil Joshi",
+      "email": "sunil.joshi@example.com",
+      "role": "EMPLOYEE",
+      "manager_id": 5,
+      "is_active": true,
+      "password": "Cricket-Match-On-Sunday-12"
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1001,
+      "employee_id": 1,
+      "category": "TRAVEL",
+      "amount_paise": 245000,
+      "currency": "INR",
+      "expense_date": "2026-07-03",
+      "description": "Cab to client site - Gurgaon",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-05T09:41:00Z"
+    },
+    {
+      "id": 1002,
+      "employee_id": 1,
+      "category": "MEALS",
+      "amount_paise": 85000,
+      "currency": "INR",
+      "expense_date": "2026-07-05",
+      "description": "Team lunch: 50% off offer",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-07T09:42:00Z"
+    },
+    {
+      "id": 1003,
+      "employee_id": 1,
+      "category": "LODGING",
+      "amount_paise": 1250000,
+      "currency": "INR",
+      "expense_date": "2026-07-10",
+      "description": "Hotel stay, Pune workshop",
+      "status": "APPROVED",
+      "submitted_at": "2026-07-12T09:43:00Z"
+    },
+    {
+      "id": 1004,
+      "employee_id": 1,
+      "category": "TRAINING",
+      "amount_paise": 7500000,
+      "currency": "INR",
+      "expense_date": "2026-07-15",
+      "description": "AWS certification bootcamp",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-17T09:44:00Z"
+    },
+    {
+      "id": 1005,
+      "employee_id": 1,
+      "category": "INTERNET",
+      "amount_paise": 99900,
+      "currency": "INR",
+      "expense_date": "2026-06-30",
+      "description": "Home broadband June",
+      "status": "REJECTED",
+      "submitted_at": "2026-07-02T09:45:00Z"
+    },
+    {
+      "id": 1006,
+      "employee_id": 1,
+      "category": "OFFICE_SUPPLIES",
+      "amount_paise": 34900,
+      "currency": "INR",
+      "expense_date": "2026-08-01",
+      "description": "Keyboard & mouse <script>alert(1)</script>",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-08-03T09:46:00Z"
+    },
+    {
+      "id": 1007,
+      "employee_id": 2,
+      "category": "TRAVEL",
+      "amount_paise": 560000,
+      "currency": "INR",
+      "expense_date": "2026-07-04",
+      "description": "Flight DEL-BLR team_offsite",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-06T09:47:00Z"
+    },
+    {
+      "id": 1008,
+      "employee_id": 2,
+      "category": "MEALS",
+      "amount_paise": 120000,
+      "currency": "INR",
+      "expense_date": "2026-07-04",
+      "description": "Client dinner O'Brien & Co",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-06T09:48:00Z"
+    },
+    {
+      "id": 1009,
+      "employee_id": 2,
+      "category": "LODGING",
+      "amount_paise": 5000000,
+      "currency": "INR",
+      "expense_date": "2026-07-20",
+      "description": "Hotel 5 nights Bengaluru",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-22T09:49:00Z"
+    },
+    {
+      "id": 1010,
+      "employee_id": 2,
+      "category": "TRAINING",
+      "amount_paise": 5000001,
+      "currency": "INR",
+      "expense_date": "2026-07-21",
+      "description": "Kubernetes course",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-23T09:50:00Z"
+    },
+    {
+      "id": 1011,
+      "employee_id": 2,
+      "category": "TRAVEL",
+      "amount_paise": 6200000,
+      "currency": "INR",
+      "expense_date": "2026-08-10",
+      "description": "International flight SIN",
+      "status": "PENDING_FINANCE",
+      "submitted_at": "2026-08-12T09:51:00Z"
+    },
+    {
+      "id": 1012,
+      "employee_id": 2,
+      "category": "INTERNET",
+      "amount_paise": 99900,
+      "currency": "INR",
+      "expense_date": "2026-07-31",
+      "description": "Home broadband July",
+      "status": "APPROVED",
+      "submitted_at": "2026-08-02T09:52:00Z"
+    },
+    {
+      "id": 1013,
+      "employee_id": 3,
+      "category": "TRAVEL",
+      "amount_paise": 410000,
+      "currency": "INR",
+      "expense_date": "2026-07-08",
+      "description": "Cab airport transfers",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-10T09:53:00Z"
+    },
+    {
+      "id": 1014,
+      "employee_id": 3,
+      "category": "MEALS",
+      "amount_paise": 45000,
+      "currency": "INR",
+      "expense_date": "2026-07-09",
+      "description": "Working lunch",
+      "status": "APPROVED",
+      "submitted_at": "2026-07-11T09:54:00Z"
+    },
+    {
+      "id": 1015,
+      "employee_id": 3,
+      "category": "TRAINING",
+      "amount_paise": 8800000,
+      "currency": "INR",
+      "expense_date": "2026-08-05",
+      "description": "Leadership program",
+      "status": "PENDING_FINANCE",
+      "submitted_at": "2026-08-07T09:55:00Z"
+    },
+    {
+      "id": 1016,
+      "employee_id": 3,
+      "category": "OFFICE_SUPPLIES",
+      "amount_paise": 150000,
+      "currency": "INR",
+      "expense_date": "2026-08-12",
+      "description": "Ergonomic chair 100%_refund pending",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-08-14T09:56:00Z"
+    },
+    {
+      "id": 1017,
+      "employee_id": 4,
+      "category": "TRAVEL",
+      "amount_paise": 780000,
+      "currency": "INR",
+      "expense_date": "2026-07-11",
+      "description": "Flight BLR-DEL review",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-13T09:57:00Z"
+    },
+    {
+      "id": 1018,
+      "employee_id": 4,
+      "category": "MEALS",
+      "amount_paise": 220000,
+      "currency": "INR",
+      "expense_date": "2026-07-12",
+      "description": "Team celebration dinner",
+      "status": "APPROVED",
+      "submitted_at": "2026-07-14T09:58:00Z"
+    },
+    {
+      "id": 1019,
+      "employee_id": 4,
+      "category": "LODGING",
+      "amount_paise": 5400000,
+      "currency": "INR",
+      "expense_date": "2026-08-02",
+      "description": "Offsite venue booking",
+      "status": "PENDING_FINANCE",
+      "submitted_at": "2026-08-04T09:59:00Z"
+    },
+    {
+      "id": 1020,
+      "employee_id": 6,
+      "category": "TRAVEL",
+      "amount_paise": 6500000,
+      "currency": "INR",
+      "expense_date": "2026-07-25",
+      "description": "Audit travel London",
+      "status": "PENDING_FINANCE",
+      "submitted_at": "2026-07-27T09:00:00Z"
+    },
+    {
+      "id": 1021,
+      "employee_id": 6,
+      "category": "MEALS",
+      "amount_paise": 60000,
+      "currency": "INR",
+      "expense_date": "2026-08-03",
+      "description": "Snacks for audit team",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-08-05T09:01:00Z"
+    },
+    {
+      "id": 1022,
+      "employee_id": 8,
+      "category": "TRAVEL",
+      "amount_paise": 180000,
+      "currency": "INR",
+      "expense_date": "2026-06-15",
+      "description": "Cab reimbursement",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-06-17T09:02:00Z"
+    },
+    {
+      "id": 1023,
+      "employee_id": 9,
+      "category": "OFFICE_SUPPLIES",
+      "amount_paise": 250000,
+      "currency": "INR",
+      "expense_date": "2026-08-15",
+      "description": "Monitor stand",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-08-17T09:03:00Z"
+    },
+    {
+      "id": 1024,
+      "employee_id": 10,
+      "category": "INTERNET",
+      "amount_paise": 99900,
+      "currency": "INR",
+      "expense_date": "2026-08-31",
+      "description": "Home broadband August",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-02T09:04:00Z"
+    },
+    {
+      "id": 1025,
+      "employee_id": 10,
+      "category": "TRAVEL",
+      "amount_paise": 1,
+      "currency": "INR",
+      "expense_date": "2026-09-01",
+      "description": "Parking fee",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-03T09:05:00Z"
+    },
+    {
+      "id": 1026,
+      "employee_id": 1,
+      "category": "TRAVEL",
+      "amount_paise": 10000000,
+      "currency": "INR",
+      "expense_date": "2026-09-10",
+      "description": "Relocation travel",
+      "status": "PENDING_FINANCE",
+      "submitted_at": "2026-09-12T09:06:00Z"
+    },
+    {
+      "id": 1027,
+      "employee_id": 2,
+      "category": "MEALS",
+      "amount_paise": 85000,
+      "currency": "INR",
+      "expense_date": "2026-09-12",
+      "description": "Lunch: ACME_Corp visit",
+      "status": "REJECTED",
+      "submitted_at": "2026-09-14T09:07:00Z"
+    },
+    {
+      "id": 1028,
+      "employee_id": 3,
+      "category": "LODGING",
+      "amount_paise": 2300000,
+      "currency": "INR",
+      "expense_date": "2026-09-15",
+      "description": "Hotel Chennai",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-17T09:08:00Z"
+    },
+    {
+      "id": 1029,
+      "employee_id": 1,
+      "category": "MEALS",
+      "amount_paise": 85000,
+      "currency": "INR",
+      "expense_date": "2026-07-05",
+      "description": "Team lunch follow-up",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-07-07T09:09:00Z"
+    },
+    {
+      "id": 1030,
+      "employee_id": 4,
+      "category": "INTERNET",
+      "amount_paise": 99900,
+      "currency": "INR",
+      "expense_date": "2026-09-20",
+      "description": "Broadband September",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-22T09:10:00Z"
+    }
+  ]
+}
