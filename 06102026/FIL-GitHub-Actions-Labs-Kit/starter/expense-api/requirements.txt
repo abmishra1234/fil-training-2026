@@ -1,0 +1,8 @@
+# Exact pins (A03). Regenerate with hashes: pip-compile --generate-hashes
+fastapi==0.142.2
+starlette==1.0.0
+uvicorn==0.46.0
+pydantic==2.13.3
+PyJWT==2.12.1
+pwdlib[argon2]==0.3.1
+argon2-cffi==25.1.0

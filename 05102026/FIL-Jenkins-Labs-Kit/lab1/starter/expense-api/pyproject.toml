@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "expense-api"
+version = "1.0.0"
+description = "Expense Claims API (FastAPI) - FIL Jenkins lab project"
+requires-python = ">=3.11"
+
+[tool.setuptools]
+packages = ["app"]
+
+# ---------------- Lint rules used by the CI "Lint" stage ----------------
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]   # pycodestyle, pyflakes, warnings, isort, bugbear
+ignore = ["B008"]                    # FastAPI uses Depends(...) in defaults by design
+
+# ---------------- Test settings used by the CI "Test" stage ----------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+filterwarnings = ["ignore::DeprecationWarning:starlette.*"]

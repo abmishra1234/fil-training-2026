@@ -1,0 +1,16 @@
+# Jenkins Configuration as Code - LOCAL TRAINING INSTANCE ONLY
+jenkins:
+  systemMessage: "FIL Jenkins Lab - local training instance (not for production use)"
+  numExecutors: 2
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_ID}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+unclassified:
+  location:
+    url: "http://localhost:8080/"

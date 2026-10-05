@@ -1,0 +1,11 @@
+# Core pipeline + Git
+workflow-aggregator
+git
+# Configuration as Code (admin user, no setup wizard)
+configuration-as-code
+# Nice-to-have for the labs
+pipeline-graph-view
+junit
+timestamper
+ws-cleanup
+credentials-binding

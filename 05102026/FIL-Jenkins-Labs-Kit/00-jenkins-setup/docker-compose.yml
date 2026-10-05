@@ -1,0 +1,18 @@
+# Start:  docker compose up -d --build      Stop: docker compose down
+# Reset everything (deletes jobs/credentials): docker compose down -v
+services:
+  jenkins:
+    build: .
+    image: fil-jenkins-lab:1.0
+    container_name: fil-jenkins
+    ports:
+      - "8080:8080"          # Jenkins UI  -> http://localhost:8080
+    environment:
+      JENKINS_ADMIN_ID: admin
+      JENKINS_ADMIN_PASSWORD: admin123   # LAB ONLY - never use such a password on a real server
+    volumes:
+      - jenkins_home:/var/jenkins_home   # jobs, builds, credentials survive restarts
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unit-converter"
+version = "1.0.0"
+description = "Tiny unit conversion library - second project for the fil-jenkins-lib lab"
+requires-python = ">=3.11"
+
+[tool.setuptools]
+packages = ["converter"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
