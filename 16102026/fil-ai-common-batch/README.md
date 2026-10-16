@@ -25,13 +25,7 @@ python 00_check_setup.py      # tells you which step is broken, if any
 |---|---|---|
 | `00_check_setup.py` | Token + gateway smoke test | MSAL, chat |
 | `01_first_call.py` | First chat call, roles, usage | `chat.completions` |
-| `02_multi_turn_chat.py` | Interactive chat with history | `chat.completions` |
-| `03_semantic_search.py` | Tiny semantic search | `embeddings` |
-| `04_text_to_speech.py` | Text → `output/speech.mp3` | `audio.speech` |
-| `05_transcribe.py` | One audio file → text | `audio.transcriptions` |
-| `06_transcribe_folder.py` | Every `.mp3` in `recordings/` → `.txt` | `audio.transcriptions` |
-| `07_image_generate.py` | One image, or `--n 3` variations | `images.generate` |
-| `08_image_edit_compose.py` | Merge two images from `inputs/` | `images.edit` |
+
 
 Run order that needs no extra files: 00 → 01 → 03 → 04 → 05 → copy `output/speech.mp3` into `recordings/` → 06 → 07.
 For 08, add two images you have the rights to use as `inputs/product.jpeg` and `inputs/model.jpg`.
