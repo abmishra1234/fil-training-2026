@@ -24,7 +24,6 @@ python 00_check_setup.py      # tells you which step is broken, if any
 | Script | Scenario | API |
 |---|---|---|
 | `00_check_setup.py` | Token + gateway smoke test | MSAL, chat |
-| `01_first_call.py` | First chat call, roles, usage | `chat.completions` |
 
 
 Run order that needs no extra files: 00 → 01 → 03 → 04 → 05 → copy `output/speech.mp3` into `recordings/` → 06 → 07.
