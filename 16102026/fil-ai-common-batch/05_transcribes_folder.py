@@ -1,8 +1,7 @@
 """
-05_transcribe.py - speech to text for one file.
-
-    python 05_transcribe.py                 (uses output/speech.mp3 from 04)
- """
+    05_transcribe.py - speech to text for one file.
+    python 05_transcribe.py (uses output/speech.mp3 from 04)
+"""
 import os
 import sys
 
