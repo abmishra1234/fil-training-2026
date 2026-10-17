@@ -19,7 +19,7 @@ speech_path = out_dir / "speech.mp3"
 
 with client.audio.speech.with_streaming_response.create(
     model=settings.tts_model,
-    voice="alloy",
+    voice="verse",
     input="Hello, world! This is a test of the text-to-speech functionality.",
     instructions="Speak in warn and upbeat tone, as if you are welcoming a new user to the platform.",
 ) as response:
