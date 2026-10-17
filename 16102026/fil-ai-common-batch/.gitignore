@@ -1,5 +1,15 @@
 .env
 .venv/
 __pycache__/
+*.py[cod]
+
+# Temporary files generated during exercises
+*.tmp
+*.temp
+~$*
+temp/
+tmp/
+
+# Generated audio and transcription output
 output/
 recordings/*.txt
