@@ -1,4 +1,4 @@
-openai>=1.66
+openai
 msal>=1.28
 httpx>=0.27
 python-dotenv>=1.0
