@@ -37,7 +37,7 @@ def transcribe_audio_file(audio_file_path: Path):
 
 # I need to iterate the given folder and transcribe all the audio files in it
 def transcribe_folder(folder_path: Path):
-    for audio_file_path in folder_path.glob("*.mp3"):
+    for audio_file_path in folder_path.glob("*.mp*"):
         print(f"Transcribing {audio_file_path}...")
         transcribed_text = transcribe_audio_file(audio_file_path)
         if transcribed_text:
