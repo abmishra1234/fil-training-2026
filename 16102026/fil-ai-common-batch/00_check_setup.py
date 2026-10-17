@@ -24,3 +24,4 @@ print("Model   :", reply.model)
 print("Reply   :", reply.choices[0].message.content)
 print("Tokens  :", reply.usage.total_tokens if reply.usage else "n/a")
 print("\nAll good - you are ready for the labs.")
+
