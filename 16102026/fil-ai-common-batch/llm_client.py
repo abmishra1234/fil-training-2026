@@ -161,3 +161,5 @@ def describe() -> str:
     if settings.mode == "enterprise":
         return f"mode=enterprise  gateway={_env('FIL_BASE_URL')}  scope={_fil_scope()}"
     return f"mode=direct  base_url={_env('OPENAI_BASE_URL') or 'https://api.openai.com/v1'}"
+
+
