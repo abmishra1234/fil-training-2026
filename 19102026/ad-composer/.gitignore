@@ -1,0 +1,16 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Temporary files generated during exercises
+*.tmp
+*.temp
+~$*
+temp/
+tmp/
+
+# Generated advertisements
+output/*
+!output/.gitkeep

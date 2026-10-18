@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ad Composer · FIL AI Cohort</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">◧</span>
+      <div>
+        <h1>Ad Composer</h1>
+        <p>Model + product + quote → campaign-ready ad</p>
+      </div>
+    </div>
+    <div class="status" id="status" title="Backend status">
+      <span class="dot"></span><span id="statusText">Connecting…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- ============ LEFT: inputs + settings ============ -->
+    <section class="panel inputs" aria-label="Inputs">
+      <h2><span class="step">1</span> Upload images</h2>
+      <div class="drops">
+        <label class="drop" id="dropModel" data-field="model_image">
+          <input type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <img alt="" hidden>
+          <span class="drop-empty"><b>Model image</b><small>Drop or click · JPG/PNG/WEBP</small></span>
+          <button type="button" class="clear" title="Remove" hidden>✕</button>
+        </label>
+        <label class="drop" id="dropProduct" data-field="product_image">
+          <input type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <img alt="" hidden>
+          <span class="drop-empty"><b>Product image</b><small>Drop or click · JPG/PNG/WEBP</small></span>
+          <button type="button" class="clear" title="Remove" hidden>✕</button>
+        </label>
+      </div>
+
+      <h2><span class="step">2</span> Marketing quote</h2>
+      <div class="quote-box">
+        <textarea id="quote" rows="2" maxlength="120" placeholder="e.g. Glow that lasts from sunrise to sunset"></textarea>
+        <div class="quote-meta">
+          <span id="quoteCount">0 / 120</span>
+          <button type="button" class="ghost" id="btnRefine">✦ Refine with AI</button>
+        </div>
+        <div class="suggestions" id="suggestions" hidden></div>
+      </div>
+
+      <h2><span class="step">3</span> Output settings</h2>
+      <div class="settings">
+        <div class="field"><label>Visual style</label><div class="chips" data-key="style"></div></div>
+        <div class="field"><label for="scene">Scene / background</label><select id="scene" data-key="scene"></select></div>
+        <div class="field"><label>Mood &amp; lighting</label><div class="chips" data-key="mood"></div></div>
+        <div class="row2">
+          <div class="field"><label>Aspect ratio</label><div class="chips" data-key="aspect_ratio"></div></div>
+          <div class="field"><label>Quality</label><div class="chips" data-key="quality"></div></div>
+        </div>
+
+        <div class="divider"><span>Text on the ad</span></div>
+        <div class="field">
+          <label>Text mode</label>
+          <div class="chips" data-key="text_mode"></div>
+          <small class="help" id="textModeHelp"></small>
+        </div>
+        <div class="row2 text-only">
+          <div class="field"><label>Position</label><div class="chips" data-key="quote_position"></div></div>
+          <div class="field"><label>Font</label><div class="chips" data-key="font_style"></div></div>
+        </div>
+        <div class="row2">
+          <div class="field color text-only"><label for="text_color">Text colour</label><input type="color" id="text_color" data-key="text_color"></div>
+          <div class="field color"><label for="accent_color">Brand accent</label><input type="color" id="accent_color" data-key="accent_color"></div>
+        </div>
+
+        <div class="divider"><span>Extras</span></div>
+        <div class="row2">
+          <div class="field"><label for="brand_name">Brand name <em>(optional)</em></label><input id="brand_name" data-key="brand_name" maxlength="40" placeholder="e.g. Lumina"></div>
+          <div class="field"><label for="variations">Variations</label>
+            <div class="range"><input type="range" id="variations" data-key="variations" min="1" max="3" value="1"><output id="variationsOut">1</output></div>
+          </div>
+        </div>
+        <div class="field"><label for="extra_instructions">Extra art direction <em>(optional)</em></label>
+          <textarea id="extra_instructions" data-key="extra_instructions" rows="2" maxlength="300" placeholder="e.g. model smiling, product in right hand, soft pink tones"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="ghost" id="btnPreview">Preview prompt</button>
+        <button type="button" class="primary" id="btnGenerate">Generate ad</button>
+      </div>
+      <p class="error" id="error" role="alert" hidden></p>
+    </section>
+
+    <!-- ============ RIGHT: result ============ -->
+    <section class="panel output" aria-label="Result">
+      <div class="stage" id="stage">
+        <div class="placeholder" id="placeholder">
+          <div class="ph-art"><span></span><span></span><span></span></div>
+          <p>Your advertisement will appear here.</p>
+          <small>Image generation usually takes 30–120 seconds.</small>
+        </div>
+        <div class="loading" id="loading" hidden>
+          <div class="spinner"></div>
+          <p>Composing your ad… <b id="elapsed">0s</b></p>
+          <small id="loadingHint">Sending images and prompt to the image model</small>
+        </div>
+        <div class="results" id="results" hidden></div>
+      </div>
+      <div class="meta" id="meta" hidden></div>
+
+      <details class="prompt" id="promptBox">
+        <summary>Prompt sent to the image model</summary>
+        <pre id="promptText">Click “Preview prompt” to see what the model will receive.</pre>
+      </details>
+
+      <div class="history">
+        <h3>Recent ads</h3>
+        <div class="history-strip" id="history"><small>No ads yet.</small></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
