@@ -20,14 +20,19 @@ export default function ChatTab({ health }) {
   const [selected, setSelected] = useState(null);
   const [focusCite, setFocusCite] = useState(null);
   const endRef = useRef(null);
+  const nextId = useRef(0);
 
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [messages, busy]);
+  useEffect(() => {
+    // Some browsers return a Promise here. Effects may only return a cleanup function.
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [messages, busy]);
 
   async function ask(q) {
     const text = (q ?? question).trim();
     if (!text || busy) return;
     setQuestion("");
-    const id = Date.now();
+    const id = nextId.current;
+    nextId.current += 2;
     setMessages((m) => [...m, { id, role: "user", text, mode }]);
     setBusy(true);
     try {
@@ -75,7 +80,7 @@ export default function ChatTab({ health }) {
             ) : m.role === "error" ? (
               <div key={m.id} className="msg bot"><ErrorBox error={m.error} /></div>
             ) : (
-              <div key={m.id} className={`msg bot ${selected === m.res ? "selected" : ""}`} onClick={() => setSelected(m.res)}>
+              <div key={m.id} className={`msg bot ${selected === m.res ? "selected" : ""}`} onClick={() => { setSelected(m.res); setFocusCite(null); }}>
                 <div className="bubble">
                   <Answer text={m.res.answer} onCite={(n) => (setSelected(m.res), setFocusCite(n))} />
                   <div className="meta">

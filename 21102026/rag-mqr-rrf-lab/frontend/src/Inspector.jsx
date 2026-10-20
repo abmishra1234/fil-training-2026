@@ -4,7 +4,7 @@ import { fmt, ModeBadge } from "./ui.jsx";
 export default function Inspector({ res, focusCite }) {
   const [open, setOpen] = useState(null);
   useEffect(() => {
-    if (focusCite && res?.sources?.[focusCite - 1]) setOpen(res.sources[focusCite - 1].chunk_id);
+    setOpen(focusCite && res?.sources?.[focusCite - 1] ? res.sources[focusCite - 1].chunk_id : null);
   }, [focusCite, res]);
 
   if (!res)

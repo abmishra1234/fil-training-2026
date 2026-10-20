@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { api } from "./api.js";
 import { ErrorBox } from "./ui.jsx";
 
@@ -9,6 +9,8 @@ export default function DocumentsTab({ onChange }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
   const [note, setNote] = useState("");
+  const selection = useRef(0);
+  const [loadingChunks, setLoadingChunks] = useState(false);
 
   const load = () => api.documents().then((d) => setDocs(d.documents), setError);
   useEffect(() => {
@@ -16,12 +18,18 @@ export default function DocumentsTab({ onChange }) {
   }, []);
 
   async function open(name) {
+    const request = ++selection.current;
     setActive(name);
+    setChunks([]);
+    setError(null);
+    setLoadingChunks(true);
     try {
-      setChunks((await api.chunks(name)).chunks);
+      const result = await api.chunks(name);
+      if (request === selection.current) setChunks(result.chunks);
     } catch (e) {
-      setChunks([]);
-      setError(e);
+      if (request === selection.current) setError(e);
+    } finally {
+      if (request === selection.current) setLoadingChunks(false);
     }
   }
 
@@ -31,6 +39,10 @@ export default function DocumentsTab({ onChange }) {
     setNote("");
     try {
       const r = await fn();
+      ++selection.current;
+      setActive(null);
+      setChunks([]);
+      setLoadingChunks(false);
       setNote(msg(r));
       await load();
       onChange?.();
@@ -57,7 +69,7 @@ export default function DocumentsTab({ onChange }) {
             </button>
           </div>
         </div>
-        <p className="muted">Files in <code>data/docs</code>. Each is split by Markdown heading, then to ≤ CHUNK_SIZE characters, embedded with ada-002 and stored in an in-memory FAISS index.</p>
+        <p className="muted">Each file is split by Markdown heading, embedded with the configured embedding model and stored in an in-memory FAISS index.</p>
         {note && <p className="ok">{note}</p>}
         <ErrorBox error={error} />
         <ul className="doc-list">
@@ -77,6 +89,7 @@ export default function DocumentsTab({ onChange }) {
         ) : (
           <>
             <h3>{active}</h3>
+            {loadingChunks && <p className="muted">Loading chunks…</p>}
             {chunks.map((c) => (
               <div key={c.chunk_id} className="chunk">
                 <div className="chunk-id">{c.chunk_id} · {c.text.length} chars</div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { api } from "./api.js";
 import { Answer, ErrorBox, MODES } from "./ui.jsx";
 
@@ -9,10 +9,12 @@ export default function CompareTab() {
   const [data, setData] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  const running = useRef(false);
 
   async function run(q) {
     const text = (q ?? question).trim();
-    if (!text) return;
+    if (!text || running.current) return;
+    running.current = true;
     setQuestion(text);
     setBusy(true);
     setError(null);
@@ -22,6 +24,7 @@ export default function CompareTab() {
     } catch (e) {
       setError(e);
     } finally {
+      running.current = false;
       setBusy(false);
     }
   }
@@ -32,11 +35,11 @@ export default function CompareTab() {
         <h2>Same question, three pipelines</h2>
         <p className="muted">Runs Basic RAG, MQR and MQR + RRF one after another. MQR rewrites are cached, so MQR + RRF reuses them.</p>
         <form className="composer inline" onSubmit={(e) => (e.preventDefault(), run())}>
-          <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Type a question…" aria-label="Question" />
+          <input value={question} disabled={busy} maxLength={1000} onChange={(e) => setQuestion(e.target.value)} placeholder="Type a question…" aria-label="Question" />
           <button disabled={busy || !question.trim()}>{busy ? "Running…" : "Compare"}</button>
         </form>
         <div className="samples left">
-          {SAMPLES.map((s) => <button key={s} onClick={() => run(s)}>{s}</button>)}
+          {SAMPLES.map((s) => <button key={s} disabled={busy} onClick={() => run(s)}>{s}</button>)}
         </div>
       </section>
       <ErrorBox error={error} />

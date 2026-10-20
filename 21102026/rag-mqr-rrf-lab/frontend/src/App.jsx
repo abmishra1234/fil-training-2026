@@ -4,6 +4,7 @@ import ChatTab from "./ChatTab.jsx";
 import CompareTab from "./CompareTab.jsx";
 import EvaluateTab from "./EvaluateTab.jsx";
 import DocumentsTab from "./DocumentsTab.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 
 const TABS = [
   { id: "chat", label: "Chat" },
@@ -14,6 +15,7 @@ const TABS = [
 
 export default function App() {
   const [tab, setTab] = useState("chat");
+  const [visited, setVisited] = useState(["chat"]);
   const [health, setHealth] = useState(null);
   const [healthErr, setHealthErr] = useState(null);
 
@@ -38,7 +40,10 @@ export default function App() {
         </div>
         <nav className="tabs" role="tablist">
           {TABS.map((t) => (
-            <button key={t.id} role="tab" aria-selected={tab === t.id} className={tab === t.id ? "on" : ""} onClick={() => setTab(t.id)}>
+            <button key={t.id} role="tab" aria-selected={tab === t.id} className={tab === t.id ? "on" : ""} onClick={() => {
+              setTab(t.id);
+              setVisited((tabs) => tabs.includes(t.id) ? tabs : [...tabs, t.id]);
+            }}>
               {t.label}
             </button>
           ))}
@@ -64,10 +69,10 @@ export default function App() {
       )}
 
       <main>
-        {tab === "chat" && <ChatTab health={health} />}
-        {tab === "compare" && <CompareTab />}
-        {tab === "evaluate" && <EvaluateTab />}
-        {tab === "docs" && <DocumentsTab onChange={refreshHealth} />}
+        <div hidden={tab !== "chat"}><ErrorBoundary><ChatTab health={health} /></ErrorBoundary></div>
+        {visited.includes("compare") && <div hidden={tab !== "compare"}><ErrorBoundary><CompareTab /></ErrorBoundary></div>}
+        {visited.includes("evaluate") && <div hidden={tab !== "evaluate"}><ErrorBoundary><EvaluateTab /></ErrorBoundary></div>}
+        {visited.includes("docs") && <div hidden={tab !== "docs"}><ErrorBoundary><DocumentsTab onChange={refreshHealth} /></ErrorBoundary></div>}
       </main>
     </div>
   );

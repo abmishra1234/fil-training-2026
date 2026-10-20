@@ -1,3 +1,5 @@
+import { validateChatResponse } from "./chatResponse.js";
+
 // All HTTP calls in one place. Errors carry the backend's `detail` + `hint`.
 async function request(path, options = {}) {
   const res = await fetch(path, options);
@@ -14,6 +16,9 @@ async function request(path, options = {}) {
     err.status = res.status;
     err.hint = body?.hint ?? "";
     throw err;
+  }
+  if (body === null) {
+    throw new Error("The API returned a non-JSON response. Open the app on port 8000, or run the frontend dev server with the API running on port 8000.");
   }
   return body;
 }
@@ -34,7 +39,12 @@ export const api = {
     return request("/api/documents", { method: "POST", body: fd });
   },
   reindex: () => request("/api/reindex", { method: "POST" }),
-  chat: (question, mode) => request("/api/chat", json("POST", { question, mode })),
-  compare: (question) => request("/api/compare", json("POST", { question })),
+  chat: (question, mode) => request("/api/chat", json("POST", { question, mode })).then(validateChatResponse),
+  compare: (question) => request("/api/compare", json("POST", { question })).then((results) => {
+    for (const mode of ["basic", "mqr", "mqr_rrf"]) {
+      if (!results[mode]?.error) validateChatResponse(results[mode]);
+    }
+    return results;
+  }),
   evaluate: (modes) => request("/api/evaluate", json("POST", { modes })),
 };

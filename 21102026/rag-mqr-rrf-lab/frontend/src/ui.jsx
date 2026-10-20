@@ -20,7 +20,7 @@ function inline(text, onCite, keyBase) {
     const m = p.match(/^\[\s*(\d+(?:\s*,\s*\d+)*)\s*\]$/);
     if (m)
       return m[1].split(",").map((n) => (
-        <button key={`${key}-${n}`} className="cite" onClick={() => onCite?.(Number(n))} title={`Passage ${n.trim()}`}>
+        <button key={`${key}-${n}`} className="cite" onClick={(e) => { e.stopPropagation(); onCite?.(Number(n)); }} title={`Passage ${n.trim()}`}>
           {n.trim()}
         </button>
       ));
