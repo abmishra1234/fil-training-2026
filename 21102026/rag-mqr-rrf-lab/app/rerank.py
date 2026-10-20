@@ -25,9 +25,9 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-import numpy as np
-from langchain_core.documents import Document
-from rank_bm25 import BM25Okapi
+import numpy as np # type: ignore
+from langchain_core.documents import Document # type: ignore
+from rank_bm25 import BM25Okapi # type: ignore
 
 from .basic_rag import with_meta
 from .config import RagConfig

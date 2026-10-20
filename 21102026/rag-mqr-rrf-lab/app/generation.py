@@ -18,9 +18,9 @@ from __future__ import annotations
 
 import re
 
-from langchain_core.documents import Document
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.documents import Document # type: ignore
+from langchain_core.output_parsers import StrOutputParser # type: ignore
+from langchain_core.prompts import ChatPromptTemplate # type: ignore
 
 from .basic_rag import gateway_llm
 

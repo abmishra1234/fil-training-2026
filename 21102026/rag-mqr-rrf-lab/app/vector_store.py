@@ -16,10 +16,10 @@ the vector of ANY candidate chunk without calling the embedding API again.
 """
 from __future__ import annotations
 
-import faiss
-import numpy as np
-from langchain_core.documents import Document
-from langchain_core.embeddings import Embeddings
+import faiss # type: ignore
+import numpy as np # type: ignore
+from langchain_core.documents import Document # type: ignore
+from langchain_core.embeddings import Embeddings # type: ignore
 
 
 def normalize(v) -> np.ndarray:

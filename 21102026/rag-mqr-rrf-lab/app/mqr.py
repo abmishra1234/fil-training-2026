@@ -20,7 +20,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from langchain_core.documents import Document
+from langchain_core.documents import Document # type: ignore
 
 from .basic_rag import with_meta
 from .config import RagConfig
