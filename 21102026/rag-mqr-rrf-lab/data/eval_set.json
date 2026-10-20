@@ -1,0 +1,27 @@
+{
+  "description": "Retrieval test set. A question is a HIT for a mode when at least one chunk sent to the LLM contains 'must_contain' (case-insensitive). 'type' says which weakness of Basic RAG the question targets.",
+  "questions": [
+    {"id": "Q01", "type": "exact-id",   "question": "What does PAY-E4031 mean and what should I do?",                 "must_contain": "PAY-E4031"},
+    {"id": "Q02", "type": "exact-id",   "question": "How do I fix AUTH-E1107?",                                        "must_contain": "AUTH-E1107"},
+    {"id": "Q03", "type": "exact-id",   "question": "PAY-E4035 keeps coming in prod, any idea?",                       "must_contain": "PAY-E4035"},
+    {"id": "Q04", "type": "exact-id",   "question": "What is the RTO of Ledgerline?",                                  "must_contain": "RTO of 30 minutes"},
+    {"id": "Q05", "type": "paraphrase", "question": "Can I WFH on Fridays?",                                           "must_contain": "anchor days"},
+    {"id": "Q06", "type": "paraphrase", "question": "How much daily food money do I get on a work trip to Pune?",       "must_contain": "per diem"},
+    {"id": "Q07", "type": "paraphrase", "question": "Prod payments are broken at 2am and nobody picks up. Who next?",   "must_contain": "escalates to the secondary"},
+    {"id": "Q08", "type": "paraphrase", "question": "Someone stole my laptop from the cab. What now?",                  "must_contain": "remotely wiped"},
+    {"id": "Q09", "type": "paraphrase", "question": "How many holidays can I take to next year if I don't use them?",   "must_contain": "carried forward into the next"},
+    {"id": "Q10", "type": "paraphrase", "question": "Is there money for buying a chair for my home desk?",              "must_contain": "home-office allowance"},
+    {"id": "Q11", "type": "vague",      "question": "deploy on 30th?",                                                  "must_contain": "change freeze"},
+    {"id": "Q12", "type": "vague",      "question": "how long do we keep customer ID documents",                        "must_contain": "KYC records are retained"},
+    {"id": "Q13", "type": "vague",      "question": "login blocked after wrong password",                               "must_contain": "AUTH-E1199"},
+    {"id": "Q14", "type": "multi-part", "question": "As a grad trainee, how much learning budget do I get and do I carry the on-call pager?", "must_contain": "INR 25,000"},
+    {"id": "Q15", "type": "multi-part", "question": "Same UTR showed up twice in one batch, what is the first response?", "must_contain": "DUPLICATE_HOLD"},
+    {"id": "Q16", "type": "paraphrase", "question": "They haven't picked up for twenty minutes and customers can't move their money. Who is next in line?", "must_contain": "Engineering Manager on duty"},
+    {"id": "Q17", "type": "exact-id", "question": "For a payment settlement batch showing PAY-E4035, should I retry the batch, reverse the credit, or replace the signing key?", "must_contain": "Never disable signature checks"},
+    {"id": "Q18", "type": "exact-id", "question": "AUTH-E1112 keeps coming in prod, any idea?", "must_contain": "NTP time sync"},
+    {"id": "Q19", "type": "multi-part", "question": "The settlement batch is stuck and nobody has acknowledged the page for twenty minutes. For PAY-E4037, should we send the batch again, and who do we escalate to if customer money movement is down?", "must_contain": "ACK_PENDING"},
+    {"id": "Q20", "type": "multi-part", "question": "As a new graduate trainee, what is my first-year learning budget, can I carry the on-call pager alone, and when must I complete the mandatory AI track?", "must_contain": "first quarter"},
+    {"id": "Q21", "type": "exact-id", "question": "PAY-E4038 after a key change: should I replace our HSM signing key or obtain something from the bank before resending?", "must_contain": "replacement encryption certificate"},
+    {"id": "Q22", "type": "exact-id", "question": "AUTH-E1111 in production: should we sync the host clock, refresh the token, or change the token lifetime policy?", "must_contain": "correct the identity client's token lifetime policy"}
+  ]
+}
