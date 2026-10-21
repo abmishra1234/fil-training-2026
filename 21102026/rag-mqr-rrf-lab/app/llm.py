@@ -12,8 +12,8 @@ with no code change.
 """
 from __future__ import annotations
 
-from langchain_core.embeddings import Embeddings # type: ignore
-from openai import APIConnectionError, APIStatusError, APITimeoutError # type: ignore
+from langchain_core.embeddings import Embeddings
+from openai import APIConnectionError, APIStatusError, APITimeoutError
 
 import llm_client
 from llm_client import settings as llm_settings

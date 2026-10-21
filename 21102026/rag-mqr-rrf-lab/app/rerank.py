@@ -25,9 +25,9 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-import numpy as np # type: ignore
-from langchain_core.documents import Document # type: ignore
-from rank_bm25 import BM25Okapi # type: ignore
+import numpy as np
+from langchain_core.documents import Document
+from rank_bm25 import BM25Okapi
 
 from .basic_rag import with_meta
 from .config import RagConfig
@@ -81,7 +81,20 @@ def bm25_rank(queries: list[str], docs: list[Document]) -> list[Document]:
     * Ties keep the input order (use a stable sort).
     * Edge cases: docs == [] -> [];  no query tokens -> all docs in input order with bm25_score 0.0.
     """
-    raise NotImplementedError("TODO 5: implement bm25_rank() in app/rerank.py")
+    # >>> SOLUTION
+    if not docs:
+        return []
+    q_tokens = tokenize(" ".join(queries))
+    if not q_tokens:
+        return [with_meta(d, bm25_score=0.0) for d in docs]
+    bm25 = BM25Okapi([tokenize(d.page_content) or ["<empty>"] for d in docs])
+    scores = bm25.get_scores(q_tokens)
+    order = sorted(range(len(docs)), key=lambda i: -scores[i])  # sorted() is stable
+    return [with_meta(docs[i], bm25_score=float(scores[i])) for i in order]
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 5: implement bm25_rank() in app/rerank.py")
+    # <<< STARTER
 
 
 # ---------------------------------------------------------------------------
@@ -98,7 +111,18 @@ def semantic_rank(store: InMemoryVectorStore, queries: list[str], docs: list[Doc
     * Return every doc as with_meta(doc, semantic_score=float(score)); stable sort.
     * docs == [] or queries == [] -> docs unchanged (as a new list).
     """
-    raise NotImplementedError("TODO 6: implement semantic_rank() in app/rerank.py")
+    # >>> SOLUTION
+    if not docs or not queries:
+        return list(docs)
+    q_mat = np.stack([store.embed_query(q) for q in queries])                    # (Q, dim)
+    d_mat = np.stack([store.vector_for(d.metadata["chunk_id"]) for d in docs])  # (D, dim)
+    scores = (d_mat @ q_mat.T).max(axis=1)                                       # (D,)
+    order = sorted(range(len(docs)), key=lambda i: -scores[i])
+    return [with_meta(docs[i], semantic_score=float(scores[i])) for i in order]
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 6: implement semantic_rank() in app/rerank.py")
+    # <<< STARTER
 
 
 # ---------------------------------------------------------------------------
@@ -125,7 +149,35 @@ def reciprocal_rank_fusion(
         (e.g. semantic_score from list 0) is kept.
       * [] or lists that are all empty -> [].
     """
-    raise NotImplementedError("TODO 7: implement reciprocal_rank_fusion() in app/rerank.py")
+    # >>> SOLUTION
+    if k < 0:
+        raise ValueError("k must be >= 0")
+    scores: dict[str, float] = {}
+    first_doc: dict[str, Document] = {}
+    order: dict[str, int] = {}
+    ranks: dict[str, list[int | None]] = {}
+    n_lists = len(ranked_lists)
+    for li, docs in enumerate(ranked_lists):
+        seen_here: set[str] = set()
+        for rank, doc in enumerate(docs, start=1):
+            cid = doc.metadata["chunk_id"]
+            if cid in seen_here:
+                continue
+            seen_here.add(cid)
+            if cid not in first_doc:
+                first_doc[cid] = doc
+                order[cid] = len(order)
+                ranks[cid] = [None] * n_lists
+            ranks[cid][li] = rank
+            scores[cid] = scores.get(cid, 0.0) + 1.0 / (k + rank)
+    ids = sorted(scores, key=lambda c: (-scores[c], order[c]))
+    if top_n is not None:
+        ids = ids[: max(top_n, 0)]
+    return [with_meta(first_doc[c], rrf_score=scores[c], rrf_ranks=ranks[c]) for c in ids]
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 7: implement reciprocal_rank_fusion() in app/rerank.py")
+    # <<< STARTER
 
 
 # ---------------------------------------------------------------------------
@@ -146,4 +198,13 @@ def mqr_rrf_retrieve(
     4. fused    = reciprocal_rank_fusion([semantic, bm25], k=cfg.rrf_k, top_n=cfg.final_k)
     5. return RRFResult(mqr=mqr, semantic=semantic, bm25=bm25, fused=fused)
     """
-    raise NotImplementedError("TODO 8: implement mqr_rrf_retrieve() in app/rerank.py")
+    # >>> SOLUTION
+    mqr = mqr_retrieve(store, question, cfg, generated)
+    semantic = semantic_rank(store, mqr.queries, mqr.docs)
+    bm25 = bm25_rank(mqr.queries, mqr.docs)
+    fused = reciprocal_rank_fusion([semantic, bm25], k=cfg.rrf_k, top_n=cfg.final_k)
+    return RRFResult(mqr=mqr, semantic=semantic, bm25=bm25, fused=fused)
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 8: implement mqr_rrf_retrieve() in app/rerank.py")
+    # <<< STARTER

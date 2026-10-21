@@ -14,8 +14,8 @@ from __future__ import annotations
 
 import re
 
-from fastapi import APIRouter, File, HTTPException, Request, UploadFile # type: ignore
-from fastapi.responses import JSONResponse # type: ignore
+from fastapi import APIRouter, File, HTTPException, Request, UploadFile
+from fastapi.responses import JSONResponse
 
 from llm_client import settings as llm_settings
 

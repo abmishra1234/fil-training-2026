@@ -18,9 +18,9 @@ from __future__ import annotations
 
 import re
 
-from langchain_core.documents import Document # type: ignore
-from langchain_core.output_parsers import StrOutputParser # type: ignore
-from langchain_core.prompts import ChatPromptTemplate # type: ignore
+from langchain_core.documents import Document
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
 
 from .basic_rag import gateway_llm
 
@@ -67,7 +67,29 @@ def build_context_block(docs: list[Document], max_chars: int) -> tuple[str, list
 
     Return (context_string, used_docs).
     """
-    raise NotImplementedError("TODO 9: implement build_context_block() in app/generation.py")
+    # >>> SOLUTION
+    if not docs:
+        return "", []
+
+    def fmt(n: int, d: Document) -> str:
+        return f"[{n}] (source: {d.metadata.get('source', '?')})\n{d.page_content}"
+
+    first = fmt(1, docs[0])
+    if len(first) > max_chars:
+        first = first[: max(max_chars, 0)]
+    parts, used = [first], [docs[0]]
+    total = len(first)
+    for d in docs[1:]:
+        p = fmt(len(used) + 1, d)
+        if total + 2 + len(p) <= max_chars:
+            parts.append(p)
+            used.append(d)
+            total += 2 + len(p)
+    return "\n\n".join(parts), used
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 9: implement build_context_block() in app/generation.py")
+    # <<< STARTER
 
 
 # ---------------------------------------------------------------------------
@@ -84,7 +106,20 @@ def extract_citations(answer: str, n_passages: int) -> list[int]:
     * Ignore brackets that are not pure number lists, e.g. [see 2] or [a].
     * Return sorted, unique ints. Empty / None answer -> [].
     """
-    raise NotImplementedError("TODO 10: implement extract_citations() in app/generation.py")
+    # >>> SOLUTION
+    if not answer:
+        return []
+    found: set[int] = set()
+    for group in re.findall(r"\[(\s*\d+(?:\s*,\s*\d+)*\s*)\]", answer):
+        for num in group.split(","):
+            n = int(num)
+            if 1 <= n <= n_passages:
+                found.add(n)
+    return sorted(found)
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 10: implement extract_citations() in app/generation.py")
+    # <<< STARTER
 
 
 def generate_grounded_answer(question: str, docs: list[Document], max_chars: int) -> dict:

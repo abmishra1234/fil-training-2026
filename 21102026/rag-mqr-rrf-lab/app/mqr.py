@@ -20,7 +20,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from langchain_core.documents import Document # type: ignore
+from langchain_core.documents import Document
 
 from .basic_rag import with_meta
 from .config import RagConfig
@@ -53,8 +53,6 @@ class MQRResult:
 
 
 # ---------------------------------------------------------------------------
-# TODO 1 - parse_queries()
-# ---------------------------------------------------------------------------
 _PREFIX = re.compile(r"^\s*(?:query\s*\d+\s*[:.)-]|\d+\s*[.):-]|[-*•>]+)\s*", re.IGNORECASE)
 
 
@@ -78,7 +76,23 @@ def parse_queries(raw: str, question: str, n: int) -> list[str]:
     HINT: _PREFIX (above) strips one leading number/bullet; _norm() gives a
           comparison key.
     """
-    raise NotImplementedError("TODO 1: implement parse_queries() in app/mqr.py")
+    if not raw or n <= 0:
+        return []
+    seen = {_norm(question)}
+    out: list[str] = []
+    for line in raw.splitlines():
+        line = line.strip()
+        if not line or line.endswith(":"):
+            continue
+        line = _PREFIX.sub("", line).strip().strip("\"'`").strip()
+        key = _norm(line)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.append(line)
+        if len(out) >= n:
+            break
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -96,7 +110,19 @@ def generate_queries(question: str, n: int) -> list[str]:
       MQR must never break the chatbot: the caller falls back to the
       original question.
     """
-    raise NotImplementedError("TODO 2: implement generate_queries() in app/mqr.py")
+    # >>> SOLUTION
+    if not question or not question.strip() or n <= 0:
+        return []
+    prompt = MQR_PROMPT.format(n=n, question=question.strip())
+    try:
+        reply = chat_complete([{"role": "user", "content": prompt}])
+    except RagError:
+        return []
+    return parse_queries(reply, question, n)
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 2: implement generate_queries() in app/mqr.py")
+    # <<< STARTER
 
 
 # ---------------------------------------------------------------------------
@@ -111,7 +137,20 @@ def unique_union(doc_lists: list[list[Document]]) -> list[Document]:
     * Order = first-seen order: all of list 0, then the new ones of list 1, ...
     * Empty input or empty lists -> [].
     """
-    raise NotImplementedError("TODO 3: implement unique_union() in app/mqr.py")
+    # >>> SOLUTION
+    seen: set[str] = set()
+    out: list[Document] = []
+    for docs in doc_lists:
+        for doc in docs:
+            cid = doc.metadata["chunk_id"]
+            if cid not in seen:
+                seen.add(cid)
+                out.append(doc)
+    return out
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 3: implement unique_union() in app/mqr.py")
+    # <<< STARTER
 
 
 # ---------------------------------------------------------------------------
@@ -139,4 +178,21 @@ def mqr_retrieve(
     4. docs = unique_union([per_query[q] for q in queries])
     5. return MQRResult(queries=..., per_query=..., docs=..., generated=..., llm_failed=...)
     """
-    raise NotImplementedError("TODO 4: implement mqr_retrieve() in app/mqr.py")
+    # >>> SOLUTION
+    if generated is None:
+        generated = generate_queries(question, cfg.mqr_num_queries)
+    queries = ([question] if cfg.mqr_include_original else []) + list(generated)
+    llm_failed = not generated
+    if not queries:
+        queries = [question]
+
+    per_query: dict[str, list[Document]] = {}
+    for q in queries:
+        per_query[q] = [with_meta(doc, score=float(s), query=q) for doc, s in store.search(q, cfg.mqr_k)]
+
+    docs = unique_union([per_query[q] for q in queries])
+    return MQRResult(queries=queries, per_query=per_query, docs=docs, generated=list(generated), llm_failed=llm_failed)
+    # <<< SOLUTION
+    # >>> STARTER
+    # raise NotImplementedError("TODO 4: implement mqr_retrieve() in app/mqr.py")
+    # <<< STARTER

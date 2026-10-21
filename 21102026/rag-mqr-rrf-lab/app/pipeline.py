@@ -13,7 +13,7 @@ import threading
 import time
 from datetime import datetime, timezone
 
-from langchain_core.documents import Document # type: ignore
+from langchain_core.documents import Document
 
 from .basic_rag import basic_retrieve, build_basic_chain
 from .config import RagConfig, config

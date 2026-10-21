@@ -13,8 +13,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from langchain_core.documents import Document # type: ignore
-from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter # type: ignore
+from langchain_core.documents import Document
+from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 
 ALLOWED_SUFFIXES = {".md", ".txt"}
 

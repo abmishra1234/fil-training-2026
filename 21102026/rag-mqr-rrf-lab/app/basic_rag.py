@@ -17,11 +17,11 @@ Do not change this file: it is the "before" in your before/after comparison.
 """
 from __future__ import annotations
 
-from langchain_core.documents import Document # type: ignore
-from langchain_core.output_parsers import StrOutputParser # type: ignore
-from langchain_core.prompt_values import PromptValue # type: ignore
-from langchain_core.prompts import ChatPromptTemplate # type: ignore
-from langchain_core.runnables import RunnableLambda, RunnableParallel, RunnablePassthrough # type: ignore
+from langchain_core.documents import Document
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompt_values import PromptValue
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableLambda, RunnableParallel, RunnablePassthrough
 
 from .llm import chat_complete
 from .vector_store import InMemoryVectorStore
