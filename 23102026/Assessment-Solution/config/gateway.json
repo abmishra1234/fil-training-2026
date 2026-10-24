@@ -1,0 +1,8 @@
+{
+  "_comment": "Mini AI Gateway config. Synthetic data only. Edit codenames here; no code change needed. Restart the server (or call reset_default_gateway) after editing.",
+  "codenames": [
+    "Project Falcon",
+    "Project Monsoon"
+  ],
+  "credential_keywords": ["password", "secret", "api_key"]
+}

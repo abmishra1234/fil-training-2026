@@ -1,0 +1,190 @@
+"""
+app/rerank.py - Re-ranking with Reciprocal Rank Fusion (RRF).   solved in Lab 1
+
+MQR finds MORE chunks (better recall) but now we have 10-20 of them.
+Sending all of them to the LLM costs money and adds noise. So we rank the
+pool twice and fuse the two rankings:
+
+    pool from MQR (≈15 chunks)
+        ├─ semantic rank  : cosine(query vectors, chunk vector)  - understands meaning
+        └─ BM25 rank      : keyword match (exact words / codes)  - understands "PAY-E4035"
+                        │
+                        ▼
+    RRF score(chunk) = Σ over rankings   1 / (k + rank)        rank starts at 1, k = 60
+                        │
+                        ▼
+    top FINAL_K (5) chunks -> LLM
+
+Why RRF? Cosine scores (0.71, 0.69 ...) and BM25 scores (12.4, 3.1 ...) are on
+different scales, so you cannot just add them. RRF only uses the POSITION in
+each list, so no score normalisation is needed. A chunk that is near the top
+of BOTH lists wins. (LangChain's `EnsembleRetriever` uses the same formula.)
+"""
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+
+import numpy as np
+from langchain_core.documents import Document
+from rank_bm25 import BM25Okapi
+
+from .basic_rag import with_meta
+from .config import RagConfig
+from .mqr import MQRResult, mqr_retrieve
+from .vector_store import InMemoryVectorStore
+
+STOPWORDS = {
+    "a", "an", "the", "is", "are", "am", "was", "were", "be", "to", "of", "and", "or", "in", "on",
+    "for", "with", "at", "by", "from", "do", "does", "did", "i", "my", "me", "we", "our", "you",
+    "your", "it", "this", "that", "what", "how", "can", "should", "if", "any", "there", "get",
+}
+_TOKEN = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+
+
+def tokenize(text: str) -> list[str]:
+    """
+    PROVIDED. Lower-case word tokens for BM25, stopwords removed.
+    Hyphenated identifiers are kept whole AND split, so "PAY-E4031?" gives
+    ["pay-e4031", "pay", "e4031"]: an exact code match scores highest, a
+    partial one still counts.
+    """
+    tokens: list[str] = []
+    for tok in _TOKEN.findall((text or "").lower()):
+        if tok in STOPWORDS:
+            continue
+        tokens.append(tok)
+        if "-" in tok:
+            tokens.extend(p for p in tok.split("-") if p and p not in STOPWORDS)
+    return tokens
+
+
+@dataclass
+class RRFResult:
+    mqr: MQRResult
+    semantic: list[Document] = field(default_factory=list)  # pool ordered by semantic score
+    bm25: list[Document] = field(default_factory=list)      # pool ordered by BM25 score
+    fused: list[Document] = field(default_factory=list)     # top FINAL_K after RRF
+
+
+# ---------------------------------------------------------------------------
+# Lab 1 · TODO 5 (solved) - bm25_rank()
+# ---------------------------------------------------------------------------
+def bm25_rank(queries: list[str], docs: list[Document]) -> list[Document]:
+    """
+    Order `docs` by BM25 keyword relevance to the queries, best first.
+
+    * query tokens = tokenize() of ALL queries joined with a space
+      (original + LLM rewrites = query expansion)
+    * corpus = [tokenize(d.page_content) for d in docs]; use rank_bm25.BM25Okapi
+    * Return EVERY doc (never drop any), each as with_meta(doc, bm25_score=float(score)).
+    * Ties keep the input order (use a stable sort).
+    * Edge cases: docs == [] -> [];  no query tokens -> all docs in input order with bm25_score 0.0.
+    """
+    if not docs:
+        return []
+    q_tokens = tokenize(" ".join(queries))
+    if not q_tokens:
+        return [with_meta(d, bm25_score=0.0) for d in docs]
+    bm25 = BM25Okapi([tokenize(d.page_content) or ["<empty>"] for d in docs])
+    scores = bm25.get_scores(q_tokens)
+    order = sorted(range(len(docs)), key=lambda i: -scores[i])  # sorted() is stable
+    return [with_meta(docs[i], bm25_score=float(scores[i])) for i in order]
+
+
+# ---------------------------------------------------------------------------
+# Lab 1 · TODO 6 (solved) - semantic_rank()
+# ---------------------------------------------------------------------------
+def semantic_rank(store: InMemoryVectorStore, queries: list[str], docs: list[Document]) -> list[Document]:
+    """
+    Order `docs` by meaning, best first.
+
+    * score(doc) = MAX over queries of  dot(store.embed_query(q), store.vector_for(chunk_id))
+      (vectors are unit length, so dot product == cosine similarity)
+    * store.embed_query() is cached, so the queries MQR already searched cost
+      no new embedding request. Do NOT call store.search() here.
+    * Return every doc as with_meta(doc, semantic_score=float(score)); stable sort.
+    * docs == [] or queries == [] -> docs unchanged (as a new list).
+    """
+    if not docs or not queries:
+        return list(docs)
+    q_mat = np.stack([store.embed_query(q) for q in queries])                    # (Q, dim)
+    d_mat = np.stack([store.vector_for(d.metadata["chunk_id"]) for d in docs])  # (D, dim)
+    scores = (d_mat @ q_mat.T).max(axis=1)                                       # (D,)
+    order = sorted(range(len(docs)), key=lambda i: -scores[i])
+    return [with_meta(docs[i], semantic_score=float(scores[i])) for i in order]
+
+
+# ---------------------------------------------------------------------------
+# Lab 1 · TODO 7 (solved) - reciprocal_rank_fusion()
+# ---------------------------------------------------------------------------
+def reciprocal_rank_fusion(
+    ranked_lists: list[list[Document]], k: int = 60, top_n: int | None = None
+) -> list[Document]:
+    """
+    Fuse several rankings into one.
+
+        rrf_score(doc) = Σ_lists  1 / (k + rank_in_that_list)      rank is 1-based
+
+    Rules (the tests check every one):
+      * k < 0 -> raise ValueError.
+      * A doc missing from a list simply gets nothing from that list.
+      * If the same chunk_id appears twice in ONE list, only its first (best)
+        position counts.
+      * Sort by rrf_score, highest first. TIES: the doc seen first wins, reading
+        list 0 top-to-bottom, then list 1 top-to-bottom, and so on.
+      * top_n=None -> return all; otherwise at most top_n (top_n <= 0 -> []).
+      * Return copies: with_meta(first_seen_doc, rrf_score=score, rrf_ranks=[rank or None per list])
+        Use the FIRST-SEEN Document object as the base so its metadata
+        (e.g. semantic_score from list 0) is kept.
+      * [] or lists that are all empty -> [].
+    """
+    if k < 0:
+        raise ValueError("k must be >= 0")
+    scores: dict[str, float] = {}
+    first_doc: dict[str, Document] = {}
+    order: dict[str, int] = {}
+    ranks: dict[str, list[int | None]] = {}
+    n_lists = len(ranked_lists)
+    for li, docs in enumerate(ranked_lists):
+        seen_here: set[str] = set()
+        for rank, doc in enumerate(docs, start=1):
+            cid = doc.metadata["chunk_id"]
+            if cid in seen_here:
+                continue
+            seen_here.add(cid)
+            if cid not in first_doc:
+                first_doc[cid] = doc
+                order[cid] = len(order)
+                ranks[cid] = [None] * n_lists
+            ranks[cid][li] = rank
+            scores[cid] = scores.get(cid, 0.0) + 1.0 / (k + rank)
+    ids = sorted(scores, key=lambda c: (-scores[c], order[c]))
+    if top_n is not None:
+        ids = ids[: max(top_n, 0)]
+    return [with_meta(first_doc[c], rrf_score=scores[c], rrf_ranks=ranks[c]) for c in ids]
+
+
+# ---------------------------------------------------------------------------
+# Lab 1 · TODO 8 (solved) - mqr_rrf_retrieve()
+# ---------------------------------------------------------------------------
+def mqr_rrf_retrieve(
+    store: InMemoryVectorStore,
+    question: str,
+    cfg: RagConfig,
+    generated: list[str] | None = None,
+) -> RRFResult:
+    """
+    MQR for recall, RRF for precision.
+
+    1. mqr = mqr_retrieve(store, question, cfg, generated)
+    2. semantic = semantic_rank(store, mqr.queries, mqr.docs)
+    3. bm25     = bm25_rank(mqr.queries, mqr.docs)
+    4. fused    = reciprocal_rank_fusion([semantic, bm25], k=cfg.rrf_k, top_n=cfg.final_k)
+    5. return RRFResult(mqr=mqr, semantic=semantic, bm25=bm25, fused=fused)
+    """
+    mqr = mqr_retrieve(store, question, cfg, generated)
+    semantic = semantic_rank(store, mqr.queries, mqr.docs)
+    bm25 = bm25_rank(mqr.queries, mqr.docs)
+    fused = reciprocal_rank_fusion([semantic, bm25], k=cfg.rrf_k, top_n=cfg.final_k)
+    return RRFResult(mqr=mqr, semantic=semantic, bm25=bm25, fused=fused)
