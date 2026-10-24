@@ -1,0 +1,16 @@
+INVOICE
+Gurgaon Cafe & Caterers
+Shop 7, Sector 29 Market, Gurugram, Haryana
+
+Invoice No: GCC-1187
+Date: 15/10/2026
+To: FIL Gurgaon - Admin (Team offsite lunch)
+
+Item                      Qty   Rate     Amount
+Veg lunch boxes            40   180.00   7,200.00
+Tea & coffee service        1  1500.00   1,500.00
+
+Subtotal                                  8,700.00
+GST 5%                                      435.00
+TOTAL PAYABLE                             9,135.00
+Thank you for your order!

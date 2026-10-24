@@ -1,0 +1,3 @@
+{"id": "inv-01-clean", "input_file": "invoice_01_clean.txt", "expect_status": "OK", "must_contain": ["Vendor", "GSTIN", "Invoice No", "Grand total", "SOS/2026/0412", "14,750.00"]}
+{"id": "inv-02-gstin", "input_file": "invoice_02_missing_gstin.txt", "expect_status": "NEEDS_INFO", "must_contain": ["Vendor", "GSTIN", "Invoice No", "Grand total", "GCC-1187", "9,135.00"]}
+{"id": "inv-03-mismatch", "input_file": "invoice_03_total_mismatch.txt", "expect_status": "MISMATCH", "must_contain": ["Vendor", "GSTIN", "Invoice No", "Grand total", "NLC/INV/26-27/0093", "41,828.00"]}

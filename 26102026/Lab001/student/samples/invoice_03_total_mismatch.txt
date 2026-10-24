@@ -1,0 +1,17 @@
+TAX INVOICE
+NetLink Cabling Solutions LLP
+Udyog Vihar Phase IV, Gurugram 122015
+GSTIN: 06AAFCN5678K1Z2
+
+Invoice Number: NLC/INV/26-27/0093
+Invoice Date: 18 October 2026
+Customer: FIL Gurgaon, IT Infrastructure
+
+Sl  Item                         Qty    Rate (INR)    Amount (INR)
+1   Cat6 UTP cable (305 m box)    3      8,200.00       24,600.00
+2   RJ45 connectors              500         12.00        6,000.00
+3   Installation & testing         1      4,000.00        4,000.00
+
+Taxable value                                          34,600.00
+IGST @ 18%                                              6,228.00
+Invoice Total                                          41,828.00

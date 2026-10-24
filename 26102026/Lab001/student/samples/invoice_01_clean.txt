@@ -1,0 +1,17 @@
+TAX INVOICE
+Shakti Office Supplies Pvt. Ltd.
+Plot 14, Okhla Industrial Area Phase II, New Delhi 110020
+GSTIN: 07AABCS1234F1Z5
+
+Invoice No: SOS/2026/0412
+Invoice Date: 12-Oct-2026
+Bill To: FIL Gurgaon, Accounts Payable
+
+#  Description              Qty   Unit Price (INR)   Amount (INR)
+1  A4 copier paper (ream)    20        280.00          5,600.00
+2  Toner cartridge 85A        2      3,450.00          6,900.00
+
+                                    Subtotal          12,500.00
+                                    GST @ 18%          2,250.00
+                                    Grand Total       14,750.00
+Payment terms: 30 days
