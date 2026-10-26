@@ -1,0 +1,9 @@
+pyyaml>=6.0
+jsonschema>=4.18
+pytest>=8.0
+python-dotenv>=1.0
+openai>=1.99         # enterprise + direct modes
+httpx>=0.27
+msal>=1.28           # enterprise mode (Azure AD token)
+# tiktoken           # optional: exact token counts in check_skill.py
+# mcp                # optional: Lab 2 stretch goal (MCP tool wrapper)

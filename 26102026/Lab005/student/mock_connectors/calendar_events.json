@@ -1,0 +1,9 @@
+{
+  "_comment": "MOCK of the calendar system. In production: the calendar MCP server (get_event tool). Fictional meetings.",
+  "events": [
+    {"event_id": "EVT-7781", "title": "Invoice skill: sprint review", "date": "2026-10-21",
+     "organiser": "FIL3301", "attendees": ["FIL3301", "FIL2088", "FIL1150", "FIL1023"]},
+    {"event_id": "EVT-7790", "title": "Capstone planning: Tier 1 skills", "date": "2026-10-23",
+     "organiser": "FIL2088", "attendees": ["FIL2088", "FIL1150"]}
+  ]
+}

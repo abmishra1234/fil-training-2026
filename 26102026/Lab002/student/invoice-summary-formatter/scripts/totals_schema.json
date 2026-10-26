@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "compute_invoice_totals",
+  "$comment": "TODO 1: add required, items (qty > 0, price >= 0), minItems, an enum for gst_rate, stated_total, and additionalProperties: false",
+  "type": "object",
+  "properties": {
+    "lines": {"type": "array"},
+    "gst_rate": {"type": "number"}
+  }
+}

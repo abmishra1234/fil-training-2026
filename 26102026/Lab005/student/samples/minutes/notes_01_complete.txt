@@ -1,0 +1,7 @@
+Meeting: EVT-7781 Invoice skill sprint review, 21 Oct 2026
+Rohit opened. Neha demoed the trigger evals: 9/10 now.
+Decision: ship invoice-summary-formatter v2 to the pilot AP team.
+Actions:
+- Neha (FIL2088) to publish the skill to the internal catalog by 28 Oct 2026
+- Priya (FIL1150) to add CGST+SGST test case by 25 Oct 2026
+- Aarav (FIL1023) to collect 20 real invoices from AP by 30 Oct 2026

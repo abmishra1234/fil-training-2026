@@ -1,0 +1,3 @@
+{"prompt": "Here's the bill from Shakti Office Supplies, can you summarise it for approval?", "expected": "invoice-summary-formatter"}
+{"prompt": "Raise a purchase order for 20 office chairs from Shakti", "expected": "purchase-order-creator"}
+{"prompt": "Help me file our GSTR-3B return for October", "expected": "NONE"}

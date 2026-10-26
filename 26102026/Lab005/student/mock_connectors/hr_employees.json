@@ -1,0 +1,13 @@
+{
+  "_comment": "MOCK of the HR system of record. In production this data comes from the HR MCP server (get_employee tool, OAuth on-behalf-of the user). Fictional people.",
+  "employees": [
+    {"emp_id": "FIL1023", "name": "Aarav Sharma", "grade": "L1", "department": "AP Operations", "manager": "FIL3301",
+     "leave": {"casual": 4, "sick": 6, "earned": 11.5}, "leave_taken_this_year": {"casual": 4, "sick": 1, "earned": 3}},
+    {"emp_id": "FIL1150", "name": "Priya Nair", "grade": "L1", "department": "AI Engineering", "manager": "FIL3301",
+     "leave": {"casual": 0, "sick": 7, "earned": 2}, "leave_taken_this_year": {"casual": 8, "sick": 0, "earned": 12}},
+    {"emp_id": "FIL2088", "name": "Neha Verma", "grade": "L2", "department": "AI Engineering", "manager": "FIL3301",
+     "leave": {"casual": 6, "sick": 8, "earned": 18}, "leave_taken_this_year": {"casual": 2, "sick": 0, "earned": 4}},
+    {"emp_id": "FIL3301", "name": "Rohit Mehta", "grade": "L3", "department": "AI Engineering", "manager": null,
+     "leave": {"casual": 5, "sick": 8, "earned": 22}, "leave_taken_this_year": {"casual": 3, "sick": 0, "earned": 6}}
+  ]
+}

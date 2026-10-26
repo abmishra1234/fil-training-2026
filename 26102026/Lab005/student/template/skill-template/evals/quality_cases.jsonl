@@ -1,0 +1,1 @@
+{"id": "case-01", "input_file": "../../samples/REPLACE.txt", "action": {"cmd": ["python", "scripts/REPLACE.py", "--data", "../mock_connectors/REPLACE.json"], "input_file": "inputs/case_01.json"}, "expect_status": "REPLACE", "must_contain": ["REPLACE"]}

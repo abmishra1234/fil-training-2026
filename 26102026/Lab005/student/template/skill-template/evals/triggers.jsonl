@@ -1,0 +1,2 @@
+{"prompt": "REPLACE: a request that should load your skill", "expected": "your-skill-name"}
+{"prompt": "REPLACE: a near-miss that another skill should handle", "expected": "leave-application-submitter"}

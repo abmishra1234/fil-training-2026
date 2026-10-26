@@ -1,0 +1,7 @@
+Meeting EVT-7790 - capstone planning - 23/10/2026
+Neha and Priya. Agreed to use the expense brief for the demo.
+Decision: demo on Monday.
+Actions:
+- prepare 3 quality cases by Sunday
+- Priya (FIL1150) to fix the gate warning by 24 Oct 2026
+- someone to book the demo room
