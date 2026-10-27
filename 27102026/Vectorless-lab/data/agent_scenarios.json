@@ -1,0 +1,30 @@
+{
+  "description": "Questions that the Lab 1 pipeline (MQR + RRF) handles badly and the agent should handle well. 'problem' = which weakness it shows.",
+  "scenarios": [
+    {"id": "S1", "problem": "Always retrieves", "expect_route": "direct",
+     "question": "Can you write me a Python function that reverses a string?",
+     "why": "Out of scope. MQR + RRF still spends 1 rewrite call + 4 searches + 1 answer call on it."},
+    {"id": "S2", "problem": "Always retrieves", "expect_route": "direct",
+     "question": "Hi! What can you help me with?",
+     "why": "Small talk needs no retrieval at all."},
+    {"id": "S3", "problem": "Cannot ask back", "expect_route": "clarify",
+     "question": "What is the limit?",
+     "why": "Too vague: hotel, per diem, client meals, home-office allowance? The agent asks once (human-in-the-loop)."},
+    {"id": "S4", "problem": "One-shot (no multi-hop)", "expect_route": "complex",
+     "question": "PAY-E5000 just fired at 11 pm. What process do we follow, and how fast must the on-call engineer acknowledge?",
+     "why": "Hop 1: PAY-E5000 says 'follow the Sev-2 process'. Hop 2: the Sev-2 response time lives in another document. MQR rewrites the original question only."},
+    {"id": "S5", "problem": "Top-k cannot aggregate (Graph RAG)", "expect_route": "complex",
+     "question": "List every rule in the handbook that applies specifically to graduate trainees.",
+     "why": "The facts are spread over 4 documents. Top-5 similarity returns chunks that look alike; the entity tool returns every mention."},
+    {"id": "S6", "problem": "LLM does arithmetic in its head", "expect_route": "complex",
+     "question": "I'm going to Pune for 3 days and 3 nights on business. What is the maximum I can claim for per diem plus hotel?",
+     "why": "Needs per diem (metro) and the hotel cap, then 3 x 2000 + 3 x 7500. The calculator tool computes it exactly."},
+    {"id": "S7", "problem": "Compare across documents", "expect_route": "complex",
+     "question": "Is a graduate trainee's first-year learning budget bigger than the home-office allowance? By how much?",
+     "why": "Two facts from two documents plus a subtraction."},
+    {"id": "S8", "problem": "No memory (follow-ups)", "expect_route": "simple",
+     "question": "How many sick leave days do employees get per year?",
+     "followup": "Can they be carried forward?",
+     "why": "Ask the follow-up in the same conversation: 'they' only makes sense with memory."}
+  ]
+}

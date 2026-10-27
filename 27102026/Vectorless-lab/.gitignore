@@ -1,0 +1,18 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Temporary files generated during exercises
+*.tmp
+*.temp
+~$*
+temp/
+tmp/
+
+# Lab 3: cached tree summaries (rebuilt automatically)
+data/.cache/
+
+# Frontend
+frontend/node_modules/
