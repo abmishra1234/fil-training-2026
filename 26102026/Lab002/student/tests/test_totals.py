@@ -9,7 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
+import pytest # type: ignore
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "invoice-summary-formatter" / "scripts" / "totals.py"

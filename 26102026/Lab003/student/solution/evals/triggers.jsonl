@@ -1,0 +1,10 @@
+{"prompt": "Here's the bill from Shakti Office Supplies, can you summarise it for approval?", "expected": "invoice-summary-formatter"}
+{"prompt": "Check if the totals on this vendor invoice add up", "expected": "invoice-summary-formatter"}
+{"prompt": "Format this tax invoice from NetLink into our AP summary", "expected": "invoice-summary-formatter"}
+{"prompt": "Vendor sent invoice GCC-1187, please put it in the standard invoice summary", "expected": "invoice-summary-formatter"}
+{"prompt": "Can you review this supplier bill and flag anything missing before I approve it?", "expected": "invoice-summary-formatter"}
+{"prompt": "Raise a purchase order for 20 office chairs from Shakti", "expected": "purchase-order-creator"}
+{"prompt": "Schedule payment for invoice SOS/2026/0412 next Friday", "expected": "payment-scheduler"}
+{"prompt": "What GST rate applies to catering services?", "expected": "gst-faq-answerer"}
+{"prompt": "Help me file our GSTR-3B return for October", "expected": "NONE"}
+{"prompt": "Create an invoice to bill our client for consulting work", "expected": "NONE"}

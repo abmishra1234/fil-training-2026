@@ -1,0 +1,4 @@
+{"employee_id": "FIL9999", "city": "Jaipur", "submitted_on": "2026-10-21",
+ "items": [
+  {"date": "2026-10-19", "category": "hotel", "amount": 2800, "receipt": true},
+  {"date": "2026-10-19", "category": "meals", "amount": 500, "receipt": true}]}

@@ -1,0 +1,6 @@
+{"prompt": "Can you check Aarav's Bengaluru travel claim against our expense policy before I approve it?", "expected": "expense-claim-checker"}
+{"prompt": "How much of this hotel and cab expense claim will actually be reimbursed?", "expected": "expense-claim-checker"}
+{"prompt": "Review my travel expenses from the Mumbai trip, which items will get rejected?", "expected": "expense-claim-checker"}
+{"prompt": "Book a hotel in Pune for next Tuesday under the travel policy", "expected": "travel-booking-assistant"}
+{"prompt": "Why is my salary lower this month?", "expected": "payroll-query-answerer"}
+{"prompt": "Check this vendor invoice from NetLink for GST errors", "expected": "invoice-summary-formatter"}

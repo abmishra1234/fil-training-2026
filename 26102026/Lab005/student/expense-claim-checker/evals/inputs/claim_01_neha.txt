@@ -1,0 +1,12 @@
+Hi, please process my expense claim for the Mumbai client visit.
+
+Employee ID: FIL2088 (Neha Verma)
+Submitted on: 20 Oct 2026
+
+14 Oct 2026  Hotel, Andheri East (1 night)            INR 5,800   receipt attached
+14 Oct 2026  Dinner                                   INR   850   receipt attached
+15 Oct 2026  Cabs to client office and airport        INR 1,200   receipt attached
+15 Oct 2026  Lunch at client canteen                  INR   420   no receipt
+
+Thanks,
+Neha

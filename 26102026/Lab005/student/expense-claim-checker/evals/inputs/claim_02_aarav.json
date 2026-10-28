@@ -1,0 +1,7 @@
+{"employee_id": "FIL1023", "city": "Bengaluru", "submitted_on": "2026-10-22",
+ "items": [
+  {"date": "2026-10-16", "category": "hotel", "amount": 5200, "receipt": true, "description": "Hotel Indiranagar"},
+  {"date": "2026-10-16", "category": "meals", "amount": 450, "receipt": true, "description": "Breakfast"},
+  {"date": "2026-10-16", "category": "meals", "amount": 300, "receipt": true, "description": "Dinner"},
+  {"date": "2026-10-17", "category": "other", "amount": 900, "receipt": true, "description": "Client dinner drinks beer"},
+  {"date": "2026-10-17", "category": "local_travel", "amount": 700, "receipt": false, "description": "Auto and metro"}]}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "compute_invoice_totals",
+  "description": "Line items of one vendor invoice. Returns exact subtotal, GST and total.",
+  "type": "object",
+  "required": ["lines", "gst_rate"],
+  "properties": {
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["qty", "price"],
+        "properties": {
+          "description": {"type": "string"},
+          "qty": {"type": "number", "exclusiveMinimum": 0},
+          "price": {"type": "number", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "gst_rate": {"enum": [0, 5, 12, 18, 28], "description": "GST percent"},
+    "stated_total": {"type": "number", "minimum": 0, "description": "Grand total printed on the invoice (optional)"}
+  },
+  "additionalProperties": false
+}

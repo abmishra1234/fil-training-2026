@@ -83,9 +83,8 @@ def main():
         (out / f"{c['id']}.md").write_text(reply, encoding="utf-8")
 
         problems = []
-        # tolerant of markdown: "Status: X", "**Status:** X", "Status: `X`", "| Status | X |", any case
-        m = re.search(r"(?im)^[\s*|`_>-]*status[\s*`_]*[:|][\s*`_|]*([A-Za-z_]+)", reply)
-        got = m.group(1).upper() if m else None
+        m = re.search(r"Status:\s*\**\s*([A-Z_]+)", reply)
+        got = m.group(1) if m else None
         if got is None:
             problems.append("no 'Status: VALUE' line")
         elif got != c["expect_status"]:

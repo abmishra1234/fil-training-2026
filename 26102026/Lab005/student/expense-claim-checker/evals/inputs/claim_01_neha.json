@@ -1,0 +1,6 @@
+{"employee_id": "FIL2088", "city": "Mumbai", "submitted_on": "2026-10-20",
+ "items": [
+  {"date": "2026-10-14", "category": "hotel", "amount": 5800, "receipt": true, "description": "Hotel, Andheri East"},
+  {"date": "2026-10-14", "category": "meals", "amount": 850, "receipt": true, "description": "Dinner"},
+  {"date": "2026-10-15", "category": "local_travel", "amount": 1200, "receipt": true, "description": "Cabs"},
+  {"date": "2026-10-15", "category": "meals", "amount": 420, "receipt": false, "description": "Lunch"}]}
