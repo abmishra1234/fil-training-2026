@@ -1,0 +1,139 @@
+# doc_id: RULES-COMPLIANCE
+# doc_type: rules
+# version: 2.3   (mirrors POL-06-v2.3 Client Communications Standards)
+# as_of_date: 2026-05-01
+# SYNTHETIC TRAINING DATA - fictional fund house, rules written for the FundLens capstone.
+#
+# How to use: your compliance_check tool loads this file and runs every rule against a draft.
+# A draft PASSES only if no rule with severity "block" fires. "warn" rules are reported but do not fail the draft.
+# Regex patterns are Python `re` syntax, matched case-insensitively. You may add an LLM-based check on top,
+# but the regex rules below must always run (they are deterministic and auditable).
+
+doc_id: RULES-COMPLIANCE
+version: "2.3"
+policy_ref: POL-06-v2.3
+mandatory_texts:
+  past_performance_warning: "Past performance is not a reliable indicator of future returns."
+  risk_warning: "The value of investments and the income from them can go down as well as up and you may get back less than you invested."
+  advice_redirect: "We are not able to give personal investment advice. If you are unsure whether an investment is right for you, please speak to a financial adviser."
+  sign_off: "Client Services Team, Lumen Crest Investments"
+
+# Patterns that mean "this draft quotes a performance or return figure"
+performance_triggers:
+  - '[+-]?\d+(\.\d+)?\s?%\s*(return|returned|growth|gain|loss|fall|fell|rise|rose|performance)'
+  - '(return|returned|performance|gained|fell|rose|lost)[^.%]{0,60}[+-]?\d+(\.\d+)?\s?%'
+  - '\b(1|3|5)[- ]year (return|performance)'
+
+rules:
+  - id: CR-01
+    name: no_personal_recommendation
+    severity: block
+    check_type: banned_regex
+    policy_ref: "POL-06-v2.3 §2.1"
+    description: The draft must not tell the client what to buy, sell, hold or switch, or say a fund is suitable for them.
+    patterns:
+      - '\byou should (buy|sell|invest|switch|move|hold|put)\b'
+      - '\bwe (recommend|suggest|advise) (that )?you\b'
+      - '\bI would (recommend|suggest|advise)\b'
+      - '(?<!whether an investment )\b(is|would be) (suitable|right|ideal|perfect) for you\b'   # the advice_redirect text itself is allowed
+      - '\bbest (fund|option|choice) for you\b'
+      - '\b(move|put|invest) (all|most) of your (savings|money|portfolio)\b'
+    fix_hint: Remove the recommendation. Use mandatory_texts.advice_redirect and give factual information only.
+
+  - id: CR-02
+    name: no_forecast_or_guarantee
+    severity: block
+    check_type: banned_regex
+    policy_ref: "POL-06-v2.3 §3.1"
+    description: The draft must not predict future returns or describe any return or income as guaranteed, certain or risk free.
+    patterns:
+      - '\bguarantee(d|s)?\b(?![^.]{0,40}\bnot\b)'
+      - '\brisk[- ]free\b'
+      - '\b(will|is going to|is set to|is expected to) (return|deliver|grow|gain|rise|recover|bounce back|outperform)\b'
+      - '\bno chance of (loss|losing)\b'
+      - '\b(certain|sure) to (rise|grow|recover|gain)\b'
+      - '\bnext year (it|the fund) will\b'
+    allow_phrases:
+      - "is not guaranteed"
+      - "are not guaranteed"
+      - "no guarantee"
+      - "not guaranteed"
+    fix_hint: Remove the prediction. If sharing a manager view, attribute it ("In the Q3 2026 commentary, the manager said...") and keep its cautious wording.
+
+  - id: CR-03
+    name: risk_warning_with_figures
+    severity: block
+    check_type: required_if
+    policy_ref: "POL-06-v2.3 §4.3"
+    description: If the draft quotes any performance or risk figure, it must contain the risk warning text.
+    trigger: performance_triggers
+    required_text: risk_warning
+    fix_hint: Append mandatory_texts.risk_warning.
+
+  - id: CR-04
+    name: past_performance_warning
+    severity: block
+    check_type: required_if
+    policy_ref: "POL-06-v2.3 §4.2"
+    description: If the draft quotes past performance, it must contain the past performance warning.
+    trigger: performance_triggers
+    required_text: past_performance_warning
+    fix_hint: Append mandatory_texts.past_performance_warning.
+
+  - id: CR-05
+    name: no_unmasked_pii
+    severity: block
+    check_type: pii_regex
+    policy_ref: "POL-06-v2.3 §6.1; POL-07-v2.0 §2.2"
+    description: No unmasked account numbers, other people's email addresses or phone numbers in the draft.
+    patterns:
+      account_number: '\bLCI-\d{8}\b'
+      email: '\b[\w.+-]+@(?!lumencrest\.example)[\w-]+\.[\w.]+\b'
+      phone: '(\+91[\s-]?)?\b[6-9]\d{4}[\s-]?\d{5}\b'
+      date_of_birth: '\b(DOB|date of birth)[:\s]+\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b'
+    allowed: "Masked account numbers such as ****4821 are allowed. The LCI client services address clientservices@lumencrest.example is allowed."
+    fix_hint: Mask account numbers to the last 4 characters and remove other personal data.
+
+  - id: CR-06
+    name: no_internal_only_content
+    severity: block
+    check_type: banned_regex
+    policy_ref: "POL-06-v2.3 §5.2"
+    description: The draft must not quote internal-only policy text, approval limits, CRM codes or internal processes.
+    patterns:
+      - '\bINTERNAL ONLY\b'
+      - '\bWV-(ERR|VUL)\b'
+      - '\bup to 3 (switching[- ]fee )?waivers\b'
+      - '\bTeam Leads? may approve\b'
+      - '\bMarket Timing Review\b'
+      - '\bflag VUL\b'
+    fix_hint: Remove internal content. Describe the client-facing outcome only.
+
+  - id: CR-07
+    name: superseded_policy_reference
+    severity: block
+    check_type: banned_regex
+    policy_ref: "POL-01-v3.0 header"
+    description: The draft must not rely on a superseded policy version.
+    patterns:
+      - '\bPOL-01-v2\.1\b'
+      - '\b3 free switches (in|per|each) (a |each )?(calendar )?year\b'
+      - '\b0\.50% switching fee\b'
+    fix_hint: Use the active policy version (POL-01-v3.0).
+
+  - id: CR-08
+    name: sign_off_present
+    severity: warn
+    check_type: required_always
+    policy_ref: "POL-06-v2.3 §5.1"
+    required_text: sign_off
+    description: Every client reply should end with the standard sign-off.
+    fix_hint: Add mandatory_texts.sign_off at the end.
+
+  - id: CR-09
+    name: advice_redirect_when_advice_requested
+    severity: warn
+    check_type: llm_judgement
+    policy_ref: "POL-06-v2.3 §2.2"
+    description: If the client asked for personal advice, the reply should include mandatory_texts.advice_redirect. Detect "asked for advice" from the client email (LLM or keyword check).
+    fix_hint: Add mandatory_texts.advice_redirect.

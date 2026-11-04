@@ -1,0 +1,17 @@
+# doc_id: EML-007
+# doc_type: client_email
+# as_of_date: 2026-10-26
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Kavya Raman <kavya.raman@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-26
+Subject: My father passed away
+Account on file: LCI-72215508
+
+Dear Lumen Crest,
+
+My father, Mr. Venkat Raman, passed away last week. He had investments with you in the Global Multi Asset Income Fund (account LCI-72215508). I don't know what I need to do. Please tell me the process. I am finding this very difficult.
+
+Kavya Raman
++91 90080 77321

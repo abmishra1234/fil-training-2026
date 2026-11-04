@@ -1,0 +1,19 @@
+# doc_id: EML-001
+# doc_type: client_email
+# as_of_date: 2026-10-16
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Priya Natarajan <priya.natarajan@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-16
+Subject: Why has my India fund gone down?
+Account on file: LCI-40218835
+
+Dear Client Services,
+
+I hold the LCI India Focus Equity Fund (A-Acc-USD) in my account LCI-40218835. My last statement shows the value dropped in the July to September quarter. Can you explain why the fund fell last quarter?
+
+You can call me on +91 98110 45672 if needed.
+
+Regards,
+Priya Natarajan

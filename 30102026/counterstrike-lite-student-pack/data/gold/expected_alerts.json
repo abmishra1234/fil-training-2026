@@ -1,0 +1,16 @@
+{
+  "alerts": [
+    {"cve_id": "CVE-2099-0001", "asset_id": "A-101", "priority": "P1"},
+    {"cve_id": "CVE-2099-0002", "asset_id": "A-103", "priority": "P2"},
+    {"cve_id": "CVE-2099-0007", "asset_id": "A-108", "priority": "P2"},
+    {"cve_id": "CVE-2099-0003", "asset_id": "A-104", "priority": "P3"},
+    {"cve_id": "CVE-2099-0005", "asset_id": "A-105", "priority": "P4"}
+  ],
+  "must_not_alert": [
+    {"cve_id": "CVE-2099-0001", "asset_id": "A-102", "why": "2.17.2 is already patched"},
+    {"cve_id": "CVE-2099-0002", "asset_id": "A-107", "why": "1.1.1 line is not affected"},
+    {"cve_id": "CVE-2099-0004", "asset_id": "A-106", "why": "1.24.0 is below the affected range"}
+  ],
+  "needs_human": ["CVE-2099-0008"],
+  "injection_advisories": ["CVE-2099-0005"]
+}

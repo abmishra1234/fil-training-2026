@@ -1,0 +1,16 @@
+# doc_id: EML-008
+# doc_type: client_email
+# as_of_date: 2026-10-27
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Thomas Becker <t.becker@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-27
+Subject: Why did I get the next day's price?
+Account on file: LCI-84410273
+
+Hello,
+
+I placed a buy order for the Sustainable Global Equity Fund on Monday at 14:10 CET through the portal. My contract note shows Tuesday's price. Why? I want Monday's price.
+
+Thomas Becker

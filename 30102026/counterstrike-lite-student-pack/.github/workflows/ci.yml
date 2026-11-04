@@ -1,0 +1,30 @@
+# Starter CI - keep it green. Part of the assessment is extending it (see ASSESSMENT.md, D4).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  PIP_INDEX_URL: ${{ vars.PIP_INDEX_URL || 'https://pypi.org/simple' }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - name: Public contract tests (must pass without any LLM key)
+        run: pytest tests/test_contract.py
+      # TODO (D4): add your unit tests with a coverage floor, a job that runs the fleet and
+      # enforces an eval gate against data/gold/expected_alerts.json, and upload out/ as an artifact.

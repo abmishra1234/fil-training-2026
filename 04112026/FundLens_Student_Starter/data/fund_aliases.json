@@ -1,0 +1,82 @@
+{
+  "F01": {
+    "name": "LCI Global Technology Fund",
+    "short": "Global Technology Fund",
+    "aliases": [
+      "Global Tech Fund",
+      "Global Technology",
+      "GTF"
+    ],
+    "base_currency": "USD"
+  },
+  "F02": {
+    "name": "LCI India Focus Equity Fund",
+    "short": "India Focus Equity Fund",
+    "aliases": [
+      "India Equity Fund",
+      "India Focus Fund",
+      "India Fund"
+    ],
+    "base_currency": "USD"
+  },
+  "F03": {
+    "name": "LCI Sustainable Global Equity Fund",
+    "short": "Sustainable Global Equity Fund",
+    "aliases": [
+      "Sustainable Global Equity",
+      "SGE Fund",
+      "ESG Global Equity Fund"
+    ],
+    "base_currency": "USD"
+  },
+  "F04": {
+    "name": "LCI Asia Pacific Dividend Fund",
+    "short": "Asia Pacific Dividend Fund",
+    "aliases": [
+      "Asia Pacific Dividend",
+      "APAC Dividend Fund",
+      "Asia Dividend Fund"
+    ],
+    "base_currency": "USD"
+  },
+  "F05": {
+    "name": "LCI Global Multi Asset Income Fund",
+    "short": "Global Multi Asset Income Fund",
+    "aliases": [
+      "Multi Asset Income Fund",
+      "GMAI Fund",
+      "Multi Asset Income"
+    ],
+    "base_currency": "USD"
+  },
+  "F06": {
+    "name": "LCI Euro Short Duration Bond Fund",
+    "short": "Euro Short Duration Bond Fund",
+    "aliases": [
+      "Euro Short Duration Bond",
+      "Euro Short Bond Fund",
+      "ESDB Fund"
+    ],
+    "base_currency": "EUR"
+  },
+  "F07": {
+    "name": "LCI Sustainable Climate Bond Fund",
+    "short": "Sustainable Climate Bond Fund",
+    "aliases": [
+      "Climate Bond Fund",
+      "Sustainable Climate Bond",
+      "Green Bond Fund"
+    ],
+    "base_currency": "USD"
+  },
+  "F08": {
+    "name": "LCI China Consumer Fund",
+    "short": "China Consumer Fund",
+    "aliases": [
+      "China Consumer",
+      "China Fund",
+      "CCF"
+    ],
+    "base_currency": "USD"
+  }
+}

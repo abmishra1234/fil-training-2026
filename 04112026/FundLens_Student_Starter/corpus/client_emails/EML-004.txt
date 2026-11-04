@@ -1,0 +1,17 @@
+# doc_id: EML-004
+# doc_type: client_email
+# as_of_date: 2026-10-22
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Rakesh Bansal <rakesh.bansal@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-22
+Subject: Switching fee - please waive
+Account on file: LCI-27744190
+
+Dear Sir/Madam,
+
+I already switched twice this month (between the Asia Pacific Dividend Fund and the Multi Asset Income Fund). I want to switch once more into the Euro Short Duration Bond Fund. Last year your colleague told me the first 3 switches in a year are free. Can you waive the switching fee for this one?
+
+Rakesh Bansal
+Mobile: +91 99999 01234

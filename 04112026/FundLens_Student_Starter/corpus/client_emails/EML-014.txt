@@ -1,0 +1,16 @@
+# doc_id: EML-014
+# doc_type: client_email
+# as_of_date: 2026-11-01
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Harish Menon <harish.menon@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-11-01
+Subject: Is the income fixed?
+Account on file: LCI-63390157
+
+Hi,
+
+I hold the A-Dis-USD class of the Global Multi Asset Income Fund. Is the income I receive fixed or guaranteed every quarter? What was the latest distribution yield?
+
+Harish

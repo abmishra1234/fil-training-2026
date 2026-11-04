@@ -1,0 +1,17 @@
+# doc_id: EML-006
+# doc_type: client_email
+# as_of_date: 2026-10-24
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Arjun Malhotra <arjun.m@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-24
+Subject: Guaranteed return on the climate bond fund?
+Account on file: LCI-18820456
+
+Hi,
+
+How much will the LCI Sustainable Climate Bond Fund return next year? Is the return guaranteed since it is a bond fund?
+
+Thanks
+Arjun

@@ -1,0 +1,10 @@
+.env
+.cache/
+.index/
+.data/
+__pycache__/
+*.pyc
+.venv/
+reports/predictions*.jsonl
+.pytest_cache/
+.ruff_cache/

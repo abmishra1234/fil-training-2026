@@ -1,0 +1,17 @@
+# doc_id: EML-003
+# doc_type: client_email
+# as_of_date: 2026-10-21
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Meera Iyer <meera.iyer@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-21
+Subject: Charges on the technology fund
+Account on file: LCI-33650127
+
+Hi team,
+
+What is the ongoing charge on the LCI Global Technology Fund A-Acc-USD class, and is the Y-Acc-USD class cheaper? I would like the exact figures please.
+
+Thanks,
+Meera Iyer

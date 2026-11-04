@@ -1,0 +1,10 @@
+[
+  {"asset_id": "A-101", "service": "payments-api", "component": "log4j-core", "version": "2.14.1", "internet_facing": true, "criticality": "high", "owner": "team-payments"},
+  {"asset_id": "A-102", "service": "nav-batch", "component": "log4j-core", "version": "2.17.2", "internet_facing": false, "criticality": "high", "owner": "team-fund-accounting"},
+  {"asset_id": "A-103", "service": "client-portal", "component": "openssl", "version": "3.0.6", "internet_facing": true, "criticality": "high", "owner": "team-digital"},
+  {"asset_id": "A-104", "service": "reporting-ui", "component": "jinja2", "version": "3.1.2", "internet_facing": true, "criticality": "low", "owner": "team-reporting"},
+  {"asset_id": "A-105", "service": "kyc-service", "component": "requests", "version": "2.31.0", "internet_facing": false, "criticality": "medium", "owner": "team-onboarding"},
+  {"asset_id": "A-106", "service": "fx-gateway", "component": "nginx", "version": "1.24.0", "internet_facing": true, "criticality": "high", "owner": "team-platform"},
+  {"asset_id": "A-107", "service": "hr-intranet", "component": "openssl", "version": "1.1.1w", "internet_facing": false, "criticality": "low", "owner": "team-corp-it"},
+  {"asset_id": "A-108", "service": "doc-scanner", "component": "pillow", "version": "10.0.1", "internet_facing": false, "criticality": "low", "owner": "team-ops-automation"}
+]

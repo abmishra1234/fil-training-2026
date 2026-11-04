@@ -1,0 +1,18 @@
+# doc_id: EML-010
+# doc_type: client_email
+# as_of_date: 2026-10-29
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Fatima Sheikh <fatima.sheikh@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-29
+Subject: Redemption money not received
+Account on file: LCI-55127790
+
+Dear Client Services,
+
+I sold my holding in the LCI Asia Pacific Dividend Fund on 20 October. It is now 29 October and I still have not received the money. This is not acceptable. I want to make a formal complaint.
+
+Fatima Sheikh
+Account LCI-55127790
+DOB: 14/03/1979

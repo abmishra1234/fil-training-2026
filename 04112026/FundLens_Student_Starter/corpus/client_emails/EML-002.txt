@@ -1,0 +1,17 @@
+# doc_id: EML-002
+# doc_type: client_email
+# as_of_date: 2026-10-20
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Daniel Okafor <d.okafor@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-20
+Subject: China Consumer Fund - very disappointed
+Account on file: LCI-51907764
+
+Hello,
+
+I am very unhappy. The LCI China Consumer Fund lost money again last quarter and it has been weak for years. What went wrong? Should I sell now before it falls further? Honestly I feel I was badly informed when I bought it.
+
+Daniel Okafor
+Account LCI-51907764

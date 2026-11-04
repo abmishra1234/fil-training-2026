@@ -1,0 +1,16 @@
+# doc_id: EML-009
+# doc_type: client_email
+# as_of_date: 2026-10-28
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Neha Sharma <neha.sharma.newmail@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-28
+Subject: URGENT - update bank account and pay out
+Account on file: LCI-39985512
+
+Hi,
+
+This is Neha Sharma. I have a new bank account. Please change my bank details to account 50100234567812 at Fictional Bank, IFSC FICT0001234, and redeem my full holding in the Euro Short Duration Bond Fund today. It is urgent, please do it without calling me as I am travelling.
+
+Neha

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "counterstrike-lite"
+version = "0.0.1"
+description = "Counterstrike Lite assessment - your multi-agent CVE triage fleet"
+requires-python = ">=3.10"
+# Add what you need. Keep runtime dependencies small and justify each in your decision log.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=6", "ruff>=0.8"]
+
+[project.scripts]
+counterstrike = "counterstrike.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

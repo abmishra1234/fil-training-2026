@@ -1,0 +1,16 @@
+# doc_id: EML-005
+# doc_type: client_email
+# as_of_date: 2026-10-23
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Sunita Kulkarni <sunita.k@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-23
+Subject: Should I move my savings?
+Account on file: LCI-60039218
+
+Hello,
+
+My neighbour says the India Focus Equity Fund is the best fund. I am 67 and retired. Should I move all my savings into it? Please tell me yes or no.
+
+Sunita Kulkarni

@@ -1,0 +1,17 @@
+# doc_id: EML-013
+# doc_type: client_email
+# as_of_date: 2026-10-31
+# SYNTHETIC TRAINING DATA - fictional client, names, emails, phone and account numbers. Not a real person.
+
+From: Sophie Laurent <sophie.laurent@mail.example>
+To: Client Services <clientservices@lumencrest.example>
+Date: 2026-10-31
+Subject: Sustainable fund options
+Account on file: LCI-47730081
+
+Hello,
+
+Which of your ESG or sustainable funds has the lowest ongoing charge for the A-Acc share class, and what does its Key Information Document say about risk?
+
+Kind regards,
+Sophie Laurent
